@@ -26,7 +26,7 @@
 
         header {
             max-width: 1200px;
-            margin: 0 auto 4rem auto; 
+            margin: 0 auto 2rem auto; /* Tightened slightly to let the intro section flow below it */
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -49,6 +49,41 @@
             font-weight: 300;
         }
 
+        /* Stark, High-End Welcome & Tech Stack Section */
+        .intro-section {
+            max-width: 1200px;
+            margin: 0 auto 5rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            border-top: 1px solid #111111;
+            padding-top: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .intro-column h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .intro-column p {
+            font-size: 0.95rem;
+            color: #666666;
+            line-height: 1.6;
+            font-weight: 300;
+            max-width: 480px;
+        }
+
+        /* Accent highlight for the coding aspect */
+        .intro-column p span.tech-highlight {
+            color: #a5a5a5;
+            font-weight: 400;
+        }
 
         .category-nav {
             max-width: 1200px;
@@ -91,7 +126,6 @@
             gap: 8rem; 
         }
 
-      
         .project-row {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr; 
@@ -105,7 +139,6 @@
             display: none !important;
         }
 
-   
         .project-row.alternate-layout {
             grid-template-columns: 0.8fr 1.2fr;
         }
@@ -116,7 +149,6 @@
             order: 1;
         }
 
-    
         .image-container {
             width: 100%;
             aspect-ratio: 4 / 3; 
@@ -145,7 +177,6 @@
             transform: scale(1.03);
         }
 
-    
         .project-content {
             display: flex;
             flex-direction: column;
@@ -185,6 +216,7 @@
         @media (max-width: 900px) {
             body { padding: 2rem 1rem; }
             header { margin-bottom: 3rem; }
+            .intro-section { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
             .category-nav { margin-bottom: 4rem; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.8rem; }
             .portfolio-container { gap: 5rem; }
             
@@ -204,23 +236,30 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header id="portfolio-header">
         <h1>arix.psd</h1>
         <p class="bio">Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU.</p>
     </header>
 
-    <!-- Folder-style Tab Navigation Categories Switcher -->
+    <section class="intro-section" id="portfolio-intro">
+        <div class="intro-column">
+            <h2>Welcome</h2>
+            <p>Welcome to my digital archive. This workspace serves as a curated catalog displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums.</p>
+        </div>
+        <div class="intro-column">
+            <h2>The System</h2>
+            <p>To view localized file variations, select the index folders below to filter seamlessly between commercial client operations and academic design research. <span class="tech-highlight">This workspace was custom programmed from scratch utilizing raw HTML layout logic and JavaScript GSAP animation engines</span> to guarantee flawless, high-performance visual handling.</p>
+        </div>
+    </section>
+
     <nav class="category-nav" id="portfolio-nav">
         <button class="filter-btn active" data-target="all">All Projects</button>
         <button class="filter-btn" data-target="university">University</button>
         <button class="filter-btn" data-target="freelance">Freelance Workspace</button>
     </nav>
 
-    <!-- Main Portfolio Area -->
     <main class="portfolio-container">
 
-        <!-- PROJECT 1: University -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="TURF.png" alt="Experimental Typography Layout">
@@ -236,7 +275,6 @@
             </div>
         </div>
 
-        <!-- PROJECT 2: Freelance -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Drift.png" alt="Drift App Project">
@@ -252,7 +290,6 @@
             </div>
         </div>
 
-        <!-- PROJECT 3: Freelance -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="NEST.jpg" alt="NEST Brand Identity">
@@ -268,7 +305,6 @@
             </div>
         </div>
 
-        <!-- PROJECT 4: University -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Strata.png" alt="Strata Visual Identity">
@@ -284,7 +320,6 @@
             </div>
         </div>
 
-        <!-- PROJECT 5: University -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Beer.png" alt="Beer Campaign">
@@ -300,7 +335,6 @@
             </div>
         </div>
 
-        <!-- PROJECT 6: University -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="John Lewis.png" alt="John Lewis Packaging">
@@ -318,22 +352,20 @@
 
     </main>
 
-    <!-- Animation & Filter Logic script -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-    
+        // Sequential Page Entrance Transitions
         gsap.to("#portfolio-header", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" });
-        gsap.to("#portfolio-nav", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.15 });
+        gsap.to("#portfolio-intro", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.1 });
+        gsap.to("#portfolio-nav", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.2 });
 
-    
         function setupRowsAndAnimations() {
             let visibleIndex = 1; 
 
             gsap.utils.toArray(".project-row").forEach((row) => {
                 if (!row.classList.contains('hidden')) {
                     
-              
                     if (visibleIndex % 2 === 0) {
                         row.classList.add('alternate-layout');
                     } else {
@@ -341,7 +373,6 @@
                     }
                     visibleIndex++;
 
-              
                     gsap.to(row, {
                         opacity: 1,
                         y: 0,
@@ -358,10 +389,8 @@
             });
         }
 
-       
         setupRowsAndAnimations();
 
-       
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectRows = document.querySelectorAll('.project-row');
 
@@ -373,14 +402,12 @@
 
                 const targetCategory = btn.getAttribute('data-target');
 
-               
                 ScrollTrigger.getAll().forEach(trigger => {
-                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-nav") {
+                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-intro" && trigger.vars.trigger !== "#portfolio-nav") {
                         trigger.kill();
                     }
                 });
 
-               
                 gsap.to(projectRows, {
                     opacity: 0,
                     y: 20,
@@ -393,14 +420,12 @@
 
                             if (targetCategory === 'all' || rowCategory === targetCategory) {
                                 row.classList.remove('hidden');
-                            
                                 gsap.set(row, { opacity: 0, y: 30, scale: 0.98 });
                             } else {
                                 row.classList.add('hidden');
                             }
                         });
 
-                      
                         setupRowsAndAnimations();
                         ScrollTrigger.refresh();
                     }
