@@ -730,6 +730,24 @@
             </div>
         </div>
 
+        <div class="project-row" data-category="freelance" data-project="Mosaic">
+            <div class="image-container">
+                <img src="Mosaic.png" alt="Mosaic">
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="title-wrapper">
+                        <span class="project-title">Mosaic</span>
+                    </div>
+                    <span class="project-category">Corporate Identity</span>
+                </div>
+                <p class="project-description">
+                    A strategic anniversary identity evolution for a regional event management corporation. Engineered to integrate seamlessly into active digital touchpoints, corporate communications, and high-visibility digital signatures.
+                </p>
+                <button class="view-case-study">Open Project</button>
+            </div>
+        </div>
+        
     </main>
 
     <div class="case-study-overlay" id="case-study-overlay">
@@ -875,7 +893,7 @@
                 date: "March - April 2026",
                 imgSrc: "Drift.png",
                 description: "A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.",
-                process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weaher was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun. I had back and forth conversations about how this app should look with my brother over a couple of months."
+                process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weather was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun. I had back and forth conversations about how this app should look with my brother over a couple of months."
             },
             nest: {
                 title: "NEST Property Group",
@@ -916,6 +934,16 @@
                 imgSrc: "John Lewis.png",
                 description: "A conceptual packaging evolution assignment. Stripping away decorative ornament components to highlight product geometry, resulting in an elegant and timeless sustainable footprint solution.",
                 process: "This projects aim was to create a more playful and diverse unboxing experience for all ages. With this brief I decided I wanted to produce a piece of design that holds resonance and memories with viewers, particularly the older generation due to my end results using older illustration."
+            },
+            mosaic: {
+                title: "Mosaic",
+                category: "Corporate Identity",
+                client: "Mosaic Events York",
+                role: "Brand Activation / Identity Systems",
+                date: "2026",
+                imgSrc: "Mosaic.png",
+                description: "A commercial anniversary asset strategy developed to mark a major business milestone. The brief demanded a balanced secondary execution that respects established legacy branding elements while introducing a progressive celebratory component.",
+                process: "The execution required balancing contemporary celebration layout aesthetics with established corporate infrastructure. The design process focused on refining vector stroke geometry to ensure flawless reproduction clarity at micro-scales, specifically optimization for low-resolution email environments and cross-platform mobile screen headers."
             }
         };
 
@@ -926,7 +954,7 @@
         document.querySelectorAll('.project-row').forEach(row => {
             row.addEventListener('click', (e) => {
                 if (e.target.classList.contains('view-case-study') || e.target.closest('.image-container')) {
-                    const projectId = row.getAttribute('data-project');
+                    const projectId = row.getAttribute('data-project').toLowerCase();
                     const data = projectTemplates[projectId];
                     
                     if (data) {
