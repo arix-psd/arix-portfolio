@@ -17,6 +17,11 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
+        ::selection {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
         body {
             background-color: #000000;
             color: #ffffff;
@@ -49,7 +54,6 @@
             font-weight: 300;
         }
 
-    
         .intro-section {
             max-width: 1200px;
             margin: 0 auto 5rem auto;
@@ -210,12 +214,60 @@
             font-weight: 300;
         }
 
+        footer {
+            max-width: 1200px;
+            margin: 12rem auto 4rem auto;
+            border-top: 1px solid #111111;
+            padding-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .footer-cta h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-cta a {
+            font-size: 1.2rem;
+            color: #888888;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .footer-cta a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #111111;
+            padding-top: 1.5rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.85rem;
+            color: #444444;
+            font-weight: 300;
+        }
+
         @media (max-width: 900px) {
             body { padding: 2rem 1rem; }
             header { margin-bottom: 3rem; }
             .intro-section { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
             .category-nav { margin-bottom: 4rem; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.8rem; }
             .portfolio-container { gap: 5rem; }
+            footer { margin-top: 8rem; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
             
             .project-row, .project-row.alternate-layout {
                 grid-template-columns: 1fr;
@@ -241,7 +293,7 @@
     <section class="intro-section" id="portfolio-intro">
         <div class="intro-column">
             <h2>Welcome</h2>
-            <p>Welcome to my digital portfolio!. This workspace serves as a curated space displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums.</p>
+            <p>Welcome to my digital portfolio! This workspace serves as a curated space displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums.</p>
         </div>
         <div class="intro-column" style="display: flex; align-items: flex-end;">
             <p class="tech-statement">This workspace was custom programmed from scratch using raw HTML layout logic and JavaScript GSAP animation engines for flawless, high-performance visual handling.</p>
@@ -281,7 +333,7 @@
                     <span class="project-category">UI / UX</span>
                 </div>
                 <p class="project-description">
-                    A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewers eye.
+                    A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.
                 </p>
             </div>
         </div>
@@ -326,7 +378,7 @@
                     <span class="project-category">Campaign</span>
                 </div>
                 <p class="project-description">
-                    A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture .
+                    A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.
                 </p>
             </div>
         </div>
@@ -347,6 +399,16 @@
         </div>
 
     </main>
+
+    <footer id="portfolio-footer">
+        <div class="footer-cta">
+            <h3>Let's Build</h3>
+            <a href="mailto:albert@example.com">albert@example.com</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 arix.psd. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -386,19 +448,30 @@
 
         setupRowsAndAnimations();
 
+        gsap.to("#portfolio-footer", {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: "#portfolio-footer",
+                start: "top 90%"
+            }
+        });
+
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectRows = document.querySelectorAll('.project-row');
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-               
+                
                 filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
                 const targetCategory = btn.getAttribute('data-target');
 
                 ScrollTrigger.getAll().forEach(trigger => {
-                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-intro" && trigger.vars.trigger !== "#portfolio-nav") {
+                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-intro" && trigger.vars.trigger !== "#portfolio-nav" && trigger.vars.trigger !== "#portfolio-footer") {
                         trigger.kill();
                     }
                 });
