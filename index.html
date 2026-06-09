@@ -26,7 +26,7 @@
 
         header {
             max-width: 1200px;
-            margin: 0 auto 8rem auto;
+            margin: 0 auto 4rem auto; 
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -49,40 +49,78 @@
             font-weight: 300;
         }
 
-        /* Portfolio Container holding the editorial rows */
+
+        .category-nav {
+            max-width: 1200px;
+            margin: 0 auto 6rem auto;
+            display: flex;
+            gap: 2.5rem;
+            border-bottom: 1px solid #111111;
+            padding-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: #444444;
+            font-size: 0.85rem;
+            font-weight: 400;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.3s ease;
+            padding: 0;
+        }
+
+        .filter-btn:hover {
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
         .portfolio-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 8rem; /* Significant breathing room between projects */
+            gap: 8rem; 
         }
 
-        /* Flush Premium Layout Row split */
+      
         .project-row {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr; /* Image takes slightly more visual weight */
+            grid-template-columns: 1.2fr 0.8fr; 
             gap: 4rem;
             align-items: center;
             opacity: 0; 
             transform: scale(0.98) translateY(30px);
         }
 
-        /* Automatically alternate layout sides for a dynamic editorial look */
-        .project-row:nth-child(even) {
+        /* Javascript structural layout utility toggle logic */
+        .project-row.hidden {
+            display: none !important;
+        }
+
+        /* Alternated Grid Configurations */
+        .project-row.alternate-layout {
             grid-template-columns: 0.8fr 1.2fr;
         }
-        .project-row:nth-child(even) .image-container {
+        .project-row.alternate-layout .image-container {
             order: 2;
         }
-        .project-row:nth-child(even) .project-content {
+        .project-row.alternate-layout .project-content {
             order: 1;
         }
 
-        /* Image Frame matching your rounded, padded adjustments */
+    
         .image-container {
             width: 100%;
-            aspect-ratio: 4 / 3; /* Premium landscape layout, change to 1 / 1 if you still prefer pure squares */
+            aspect-ratio: 4 / 3; 
             overflow: hidden;
             background-color: #0a0a0a;
             border: 1px solid #111111;
@@ -108,7 +146,7 @@
             transform: scale(1.03);
         }
 
-        /* Premium Typographic Description Space */
+    
         .project-content {
             display: flex;
             flex-direction: column;
@@ -147,15 +185,16 @@
         /* Mobile Responsive Adjustments */
         @media (max-width: 900px) {
             body { padding: 2rem 1rem; }
-            header { margin-bottom: 4rem; }
+            header { margin-bottom: 3rem; }
+            .category-nav { margin-bottom: 4rem; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.8rem; }
             .portfolio-container { gap: 5rem; }
             
-            .project-row, .project-row:nth-child(even) {
+            .project-row, .project-row.alternate-layout {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            .project-row:nth-child(even) .image-container { order: 1; }
-            .project-row:nth-child(even) .project-content { order: 2; }
+            .project-row.alternate-layout .image-container { order: 1; }
+            .project-row.alternate-layout .project-content { order: 2; }
             
             .image-container { aspect-ratio: 1 / 1; padding: 1rem; }
         }
@@ -172,11 +211,18 @@
         <p class="bio">Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU.</p>
     </header>
 
+    <!-- Folder-style Tab Navigation Categories Switcher -->
+    <nav class="category-nav" id="portfolio-nav">
+        <button class="filter-btn active" data-target="all">All Folders</button>
+        <button class="filter-btn" data-target="university">University Work</button>
+        <button class="filter-btn" data-target="freelance">Freelance Workspace</button>
+    </nav>
+
     <!-- Main Portfolio Area -->
     <main class="portfolio-container">
 
-        <!-- PROJECT 1 -->
-        <div class="project-row">
+        <!-- PROJECT 1: University -->
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="TURF.png" alt="Experimental Typography Layout">
             </div>
@@ -191,8 +237,8 @@
             </div>
         </div>
 
-        <!-- PROJECT 2 -->
-        <div class="project-row">
+        <!-- PROJECT 2: University -->
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Drift.png" alt="Drift App Project">
             </div>
@@ -207,8 +253,8 @@
             </div>
         </div>
 
-        <!-- PROJECT 3 -->
-        <div class="project-row">
+        <!-- PROJECT 3: Freelance -->
+        <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="NEST.jpg" alt="NEST Brand Identity">
             </div>
@@ -223,8 +269,8 @@
             </div>
         </div>
 
-        <!-- PROJECT 4 -->
-        <div class="project-row">
+        <!-- PROJECT 4: University -->
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Strata.png" alt="Strata Visual Identity">
             </div>
@@ -239,8 +285,8 @@
             </div>
         </div>
 
-        <!-- PROJECT 5 -->
-        <div class="project-row">
+        <!-- PROJECT 5: University -->
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Beer.png" alt="Beer Campaign">
             </div>
@@ -255,8 +301,8 @@
             </div>
         </div>
 
-        <!-- PROJECT 6 -->
-        <div class="project-row">
+        <!-- PROJECT 6: University -->
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="John Lewis.png" alt="John Lewis Packaging">
             </div>
@@ -273,31 +319,93 @@
 
     </main>
 
-    <!-- Animation Logic script -->
+    <!-- Animation & Filter Logic script -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Header Entrance
-        gsap.to("#portfolio-header", {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power4.out"
-        });
+    
+        gsap.to("#portfolio-header", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" });
+        gsap.to("#portfolio-nav", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.15 });
 
-        // Smooth ScrollTrigger for horizontal editorial blocks
-        gsap.utils.toArray(".project-row").forEach((row) => {
-            gsap.to(row, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 1.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: row,
-                    start: "top 80%", 
-                    toggleActions: "play none none none"
+    
+        function setupRowsAndAnimations() {
+            let visibleIndex = 1; 
+
+            gsap.utils.toArray(".project-row").forEach((row) => {
+                if (!row.classList.contains('hidden')) {
+                    
+              
+                    if (visibleIndex % 2 === 0) {
+                        row.classList.add('alternate-layout');
+                    } else {
+                        row.classList.remove('alternate-layout');
+                    }
+                    visibleIndex++;
+
+              
+                    gsap.to(row, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 85%", 
+                            toggleActions: "play none none none"
+                        }
+                    });
                 }
+            });
+        }
+
+       
+        setupRowsAndAnimations();
+
+       
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectRows = document.querySelectorAll('.project-row');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+               
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const targetCategory = btn.getAttribute('data-target');
+
+               
+                ScrollTrigger.getAll().forEach(trigger => {
+                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-nav") {
+                        trigger.kill();
+                    }
+                });
+
+               
+                gsap.to(projectRows, {
+                    opacity: 0,
+                    y: 20,
+                    scale: 0.98,
+                    duration: 0.4,
+                    stagger: 0.05,
+                    onComplete: () => {
+                        projectRows.forEach(row => {
+                            const rowCategory = row.getAttribute('data-category');
+
+                            if (targetCategory === 'all' || rowCategory === targetCategory) {
+                                row.classList.remove('hidden');
+                            
+                                gsap.set(row, { opacity: 0, y: 30, scale: 0.98 });
+                            } else {
+                                row.classList.add('hidden');
+                            }
+                        });
+
+                      
+                        setupRowsAndAnimations();
+                        ScrollTrigger.refresh();
+                    }
+                });
             });
         });
     </script>
