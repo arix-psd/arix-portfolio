@@ -564,95 +564,6 @@
             font-weight: 300;
         }
 
-        #welcome-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-color);
-            z-index: 2500; /* Keeps it above everything including the project overlay */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            transition: background-color 0.4s ease;
-        }
-
-        .welcome-box {
-            max-width: 550px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .welcome-profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: filter 0.5s ease;
-        }
-
-        .welcome-box:hover .welcome-profile-img {
-            filter: grayscale(0%);
-        }
-
-        .welcome-box h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-description {
-            font-size: 0.95rem;
-            color: var(--meta-color);
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        .enter-site-btn {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--bg-color);
-            background-color: var(--text-color);
-            border: 1px solid var(--text-color);
-            padding: 1rem 2.5rem;
-            cursor: pointer;
-            font-weight: 700;
-            margin-top: 1rem;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .enter-site-btn:hover {
-            background-color: transparent;
-            color: var(--text-color);
-        }
-
-        /* NEW GALLERY LAYOUT FOR PROJECTS */
-        .cs-image-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-            width: 100%;
-        }
-
-        .cs-gallery-img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
         @media (max-width: 900px) {
             body { padding: 2rem 1rem; }
             header { margin-bottom: 3rem; flex-direction: column; gap: 1.5rem; }
@@ -683,17 +594,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
-
-    <div id="welcome-overlay">
-        <div class="welcome-box">
-            <img src="profile.jpg" alt="Albert Richardson" class="welcome-profile-img">
-            <h1>welcome</h1>
-            <p class="welcome-description">
-                Hi, I'm Albert Richardson. Welcome to my creative workspace. I specialize in Experimental Typography and Illustration, exploring structural dynamics across both physical and digital canvases.
-            </p>
-            <button class="enter-site-btn" id="close-welcome-btn">Enter Site</button>
-        </div>
-    </div>
 
     <header id="portfolio-header">
         <div class="header-content">
@@ -1000,7 +900,7 @@
             });
         });
 
-       const projectTemplates = {
+        const projectTemplates = {
             nest: {
                 title: "NEST Property Group",
                 category: "Branding",
@@ -1008,7 +908,6 @@
                 role: "Corporate Identity",
                 date: "In Progress &mdash; <a href='https://nestpropertygroup.co.uk/' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit Live Site ↗</a>",
                 imgSrc: "NEST.jpg",
-                galleryImages: ["NEST_alt1.jpg", "NEST_alt2.jpg"], // Add extra project photos here
                 description: "Refining an organic legacy identity into a structural geometric framework. Optimized for absolute legibility across commercial vehicle wraps, high-visibility application assets, and corporate document architectures.",
                 process: "The execution began with a rigorous geometric deconstruction of the client's legacy mark. The primary objective was to strip away organic complexity and structural redundancies, replacing them with a high-contrast typographic and vector framework optimized for large-scale physical application. Every angle and line weight of the new bird-nest emblem was engineered on a strict grid to guarantee dynamic scalability."
             },
@@ -1019,7 +918,6 @@
                 role: "Experimental Typography / Mental Health Campaign",
                 date: "February - May 2026",
                 imgSrc: "TURF.png",
-                galleryImages: [], // Add extra project photos here (e.g., ["turf1.png", "turf2.png"])
                 description: "An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. It is built to push the boundaries of legibility using calculated line weight distortion and harsh geometric layouts designed for physical print mediums.",
                 process: "To build my outcomes, I decided to create imagery directly from the world around me. I first took photographs of my flat and the street I live on and turned these into vector shapes. From here I abstracted the shapes to form assets for my campaign which were later translated into app, web and poster design."
             },
@@ -1030,7 +928,6 @@
                 role: "Interface Design / App Coding",
                 date: "March - April 2026",
                 imgSrc: "Drift.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.",
                 process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weather was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun. I had back and forth conversations about how this app should look with my brother over a couple of months."
             },
@@ -1041,7 +938,6 @@
                 role: "Layout Design",
                 date: "September - November 2025",
                 imgSrc: "Beer.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.",
                 process: "To pull this design together, I decided to create my own patterns in the style of designers such as William Morris. After this, I researched text layout and structure and the best possible way of creating a design that resembles community. Pairing this with my design language I was able to create an easily distributable leaflet that accurately hit all of my criteria."
             },
@@ -1052,7 +948,6 @@
                 role: "Editorial Design / Concept UI/UX",
                 date: "November 2025 - January 2026",
                 imgSrc: "Strata.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture and interior systems.",
                 process: "The digital execution utilized a rigid responsive viewport system to treat the web browser like an elite print layout asset. Typographic scale parameters were set up using custom fluid CSS mechanics, allowing severe editorial headers to dynamically adapt across variable hardware monitors without losing structural grid alignment. The spatial environment layout sets a heavy emphasis on asymmetrical margins and brutalist structural borders, balancing full-bleed architectural presentation mockups with technical copy blocks to create a luxury gallery mood system that behaves flawlessly under modern web animation engines."
             },
@@ -1063,7 +958,6 @@
                 role: "Packaging Rebrand Concept",
                 date: "February - May 2025",
                 imgSrc: "John Lewis.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A conceptual packaging evolution assignment. Stripping away decorative ornament components to highlight product geometry, resulting in an elegant and timeless sustainable footprint solution.",
                 process: "This projects aim was to create a more playful and diverse unboxing experience for all ages. With this brief I decided I wanted to produce a piece of design that holds resonance and memories with viewers, particularly the older generation due to my end results using older illustration."
             },
@@ -1074,7 +968,6 @@
                 role: "Event Operations, Spatial Layouts & Identity Evolution",
                 date: "Nov 2022 - Aug 2024 &mdash; <a href='https://mosaicevents.co.uk/' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit Live Site ↗</a>",
                 imgSrc: "Mosaic.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A multi-year operational tenure involving on-site event management, structural spatial layout design, and digital document architecture, culminating in a specialized 20th-anniversary celebratory identity rebrand.",
                 process: "My tenure spanned both spatial logistics and graphic architecture. Initial operations focused on documentation management, content capturing, and on-site spatial engineering—including delegate tracking and calculating high-density furniture layouts for optimal crowd flow. This deep understanding of event environments directly informed the later identity system, allowing me to engineer a celebratory mark optimized for cross-platform clarity across both digital email headers and physical event wayfinding systems."
             },
@@ -1085,7 +978,6 @@
                 role: "Sponsor Football Kit Design",
                 date: "April 2025",
                 imgSrc: "Turpin.png",
-                galleryImages: [], // Add extra project photos here
                 description: "A sponsor creation based off an existing chalk illustration within the pub on a blackboard. This was then transferred to all versions of a local football club.",
                 process: "The design process focused on converting the hand-drawn, tactile qualities of the original blackboard illustration into a high-contrast vector graphic suitable for screen printing on kit textiles. Balancing the preservation of the original's gritty, authentic texture against the requirements of modern sports apparel manufacturing required precise pathing and contrast optimization to ensure the logo remained legible at distance during match play."
             }
@@ -1102,17 +994,6 @@
                     const data = projectTemplates[projectId];
                     
                     if (data) {
-                        // Dynamically loop and build the visual display column safely
-                        let visualPaneHTML = `<img src="${data.imgSrc}" alt="${data.title} Main Artwork" class="cs-main-image">`;
-                        
-                        if (data.galleryImages && data.galleryImages.length > 0) {
-                            visualPaneHTML += `<div class="cs-image-gallery">`;
-                            data.galleryImages.forEach(img => {
-                                visualPaneHTML += `<img src="${img}" alt="Project View Asset" class="cs-gallery-img">`;
-                            });
-                            visualPaneHTML += `</div>`;
-                        }
-
                         dynamicContent.innerHTML = `
                             <div class="cs-left-pane">
                                 <div class="cs-header">
@@ -1136,7 +1017,7 @@
                                 </div>
                             </div>
                             <div class="cs-right-pane">
-                                ${visualPaneHTML}
+                                <img src="${data.imgSrc}" alt="${data.title} Main Artwork" class="cs-main-image">
                             </div>
                         `;
                         
@@ -1162,3 +1043,19 @@
                 }
             });
         });
+
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                toggleBtn.textContent = 'Light Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                toggleBtn.textContent = 'Dark Mode';
+            }
+            ScrollTrigger.refresh();
+        });
+    </script>
+</body>
+</html>
