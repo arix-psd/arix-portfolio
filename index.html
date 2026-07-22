@@ -588,6 +588,46 @@
             
             .image-container { aspect-ratio: 1 / 1; padding: 1rem; }
         }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .insta-card {
+            aspect-ratio: 1 / 1;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+            display: block;
+            transition: border-color 0.4s ease;
+        }
+
+        .insta-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .insta-card:hover {
+            border-color: var(--btn-border);
+        }
+
+        .insta-card:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%);
+        }
+
+        @media (max-width: 900px) {
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -779,6 +819,27 @@
         <button class="close-btn" id="close-case-study">Close Project</button>
         <div class="case-study-content" id="case-study-dynamic-content"></div>
     </div>
+
+    <section class="instagram-section" id="instagram-feed">
+        <div class="instagram-header">
+            <h3>Instagram Feed</h3>
+            <a href="https://www.instagram.com/arix.psd" target="_blank">Follow @arix.psd ↗</a>
+        </div>
+        <div class="instagram-grid">
+            <a href="https://www.instagram.com/arix.psd" target="_blank" class="insta-card">
+                <img src="your-insta-1.jpg" alt="Instagram Post">
+            </a>
+            <a href="https://www.instagram.com/arix.psd" target="_blank" class="insta-card">
+                <img src="your-insta-2.jpg" alt="Instagram Post">
+            </a>
+            <a href="https://www.instagram.com/arix.psd" target="_blank" class="insta-card">
+                <img src="your-insta-3.jpg" alt="Instagram Post">
+            </a>
+            <a href="https://www.instagram.com/arix.psd" target="_blank" class="insta-card">
+                <img src="your-insta-4.jpg" alt="Instagram Post">
+            </a>
+        </div>
+    </section>
 
     <footer id="portfolio-footer">
         <div class="footer-grid">
