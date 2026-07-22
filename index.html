@@ -588,85 +588,6 @@
             
             .image-container { aspect-ratio: 1 / 1; padding: 1rem; }
         }
-        .instagram-section {
-            max-width: 1200px;
-            margin: 10rem auto 0 auto;
-            border-top: 1px solid var(--border-color);
-            padding-top: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: border-color 0.4s ease;
-        }
-
-        .instagram-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2rem;
-        }
-
-        .instagram-header h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .instagram-header a {
-            font-size: 0.85rem;
-            color: var(--sub-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            transition: color 0.3s ease;
-        }
-
-        .instagram-header a:hover {
-            color: var(--text-color);
-        }
-
-        .instagram-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .insta-card {
-            aspect-ratio: 1 / 1;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            position: relative;
-            display: block;
-            transition: border-color 0.4s ease;
-        }
-
-        .insta-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .insta-card:hover {
-            border-color: var(--btn-border);
-        }
-
-        .insta-card:hover img {
-            transform: scale(1.03);
-            filter: grayscale(0%);
-        }
-
-        @media (max-width: 900px) {
-            .instagram-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-            .instagram-section {
-                margin-top: 6rem;
-            }
-        }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -858,15 +779,6 @@
         <button class="close-btn" id="close-case-study">Close Project</button>
         <div class="case-study-content" id="case-study-dynamic-content"></div>
     </div>
-<section class="instagram-section" id="instagram-feed">
-        <div class="instagram-header">
-            <h3>Instagram Feed</h3>
-            <a href="https://www.instagram.com/arix.psd" target="_blank">Follow @arix.psd ↗</a>
-        </div>
-        <!-- Elfsight Live Widget -->
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div class="elfsight-app-7eb5d627-aeb6-42b0-b430-041e30fd6b84" data-elfsight-app-lazy></div>
-    </section>
 
     <footer id="portfolio-footer">
         <div class="footer-grid">
@@ -1143,17 +1055,6 @@
                 toggleBtn.textContent = 'Dark Mode';
             }
             ScrollTrigger.refresh();
-        });
-
-        gsap.to("#instagram-feed", {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: "#instagram-feed",
-                start: "top 85%"
-            }
         });
     </script>
 </body>
