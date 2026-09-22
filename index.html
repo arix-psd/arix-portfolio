@@ -236,7 +236,7 @@
         /* Intro Section */
         .intro-section {
             max-width: 1400px;
-            margin: 0 auto 6rem auto;
+            margin: 0 auto 4rem auto;
             padding: 4rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -258,6 +258,60 @@
             color: var(--sub-color);
             line-height: 1.6;
             font-weight: 300;
+        }
+
+        /* NEW: Skills Section */
+        .skills-section {
+            max-width: 1400px;
+            margin: 0 auto 6rem auto;
+            padding: 0 4rem;
+        }
+
+        .skills-header-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--meta-color);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .skills-column h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+            color: var(--text-color);
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skills-list li {
+            font-size: 0.95rem;
+            color: var(--sub-color);
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skills-list li::before {
+            content: "—";
+            color: var(--meta-color);
+            font-size: 0.8rem;
         }
 
         /* Portfolio Filter Nav */
@@ -323,7 +377,7 @@
             order: 1;
         }
 
-        /* Sleek Reveal Animation Container */
+        /* Reveal Animation Container */
         .image-container {
             width: 100%;
             aspect-ratio: 4 / 3; 
@@ -365,7 +419,7 @@
         .project-meta {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
@@ -377,11 +431,37 @@
             letter-spacing: -0.03em;
         }
 
+        .meta-right-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .project-category {
             font-size: 0.8rem;
             color: var(--meta-color);
             text-transform: uppercase;
             letter-spacing: 0.08em;
+        }
+
+        /* Info Pill Button */
+        .info-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--btn-border);
+            color: var(--text-color);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .info-toggle-btn:hover, .info-toggle-btn.active {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
         }
 
         .project-description {
@@ -399,6 +479,46 @@
             font-weight: 300;
             border-left: 2px solid var(--border-color);
             padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Collapsible Project Quick Specs Drawer */
+        .project-quick-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .project-quick-info.active {
+            max-height: 250px;
+            opacity: 1;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .info-item span {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--meta-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .info-item p {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            font-weight: 400;
         }
 
         /* Instagram Section */
@@ -574,6 +694,8 @@
             .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
             .hero-scroll-indicator { justify-self: start; }
             .intro-section { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+            .skills-section { padding: 0 2rem; }
+            .skills-grid { grid-template-columns: 1fr; gap: 2rem; }
             .category-nav { padding: 0 2rem 1rem 2rem; overflow-x: auto; gap: 1.5rem; }
             .portfolio-container { padding: 0 2rem; gap: 5rem; }
             .project-row, .project-row.alternate-layout { grid-template-columns: 1fr; gap: 2rem; }
@@ -607,6 +729,7 @@
             <a href="#hero" class="drawer-link">Home</a>
             <a href="#portfolio-nav" class="drawer-link">Selected Work</a>
             <a href="#portfolio-intro" class="drawer-link">About</a>
+            <a href="#skills" class="drawer-link">Skills</a>
             <a href="#instagram-feed" class="drawer-link">Instagram</a>
             <a href="#portfolio-footer" class="drawer-link">Contact</a>
         </div>
@@ -644,6 +767,40 @@
         </div>
     </section>
 
+    <!-- Skills & Capabilities Section -->
+    <section class="skills-section" id="skills">
+        <div class="skills-header-title">Skills & Experience</div>
+        <div class="skills-grid">
+            <div class="skills-column">
+                <h3>Design & Typography</h3>
+                <ul class="skills-list">
+                    <li>Experimental Typography</li>
+                    <li>Brand Identity Systems</li>
+                    <li>Editorial & Print Layout</li>
+                    <li>Campaign Strategy</li>
+                </ul>
+            </div>
+            <div class="skills-column">
+                <h3>Digital & Development</h3>
+                <ul class="skills-list">
+                    <li>UI / UX Prototyping</li>
+                    <li>Web Design Systems</li>
+                    <li>Frontend HTML / CSS / JS</li>
+                    <li>Python / Kotlin / Android Studio</li>
+                </ul>
+            </div>
+            <div class="skills-column">
+                <h3>Software & Tools</h3>
+                <ul class="skills-list">
+                    <li>Procreate + Adobe Creative Cloud (PSD, AI, INDD)</li>
+                    <li>Figma Design Workspaces</li>
+                    <li>GSAP Web Animation Engines</li>
+                    <li>Vector Art & Asset Extraction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Category Filter Controls -->
     <nav class="category-nav" id="portfolio-nav">
         <button class="filter-btn active" data-target="all">All Projects</button>
@@ -662,11 +819,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">T.U.R.F</span>
-                    <span class="project-category">Campaign</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Campaign</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. Built to push the boundaries of legibility using calculated line weight distortion.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Print Posters, App Concept</p></div>
+                        <div class="info-item"><span>Timeline</span><p>Feb &mdash; May 2026</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Photoshop, Illustrator, InDesign</p></div>
+                        <div class="info-item"><span>Context</span><p>University Module</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Created imagery directly from surrounding architecture. Photographs were converted into vector shapes and abstracted to form campaign assets across app, web, and poster mediums.
                 </p>
@@ -681,11 +849,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">Drift App Interface</span>
-                    <span class="project-category">UI / UX</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">UI / UX</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A weather-based social media application for Android. Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Android APK Build, Wireframes</p></div>
+                        <div class="info-item"><span>Timeline</span><p>March &mdash; April 2026</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Kotlin, Android Studio, Figma</p></div>
+                        <div class="info-item"><span>Context</span><p>Community Project</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Developed through iterative UI/UX exploration, coding 54 distinct prototypes in Kotlin using Android Studio to refine the final interface design.
                 </p>
@@ -700,11 +879,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">Beer Culture</span>
-                    <span class="project-category">Campaign</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Campaign</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A promotional layout strategy bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Physical Editorial Leaflet</p></div>
+                        <div class="info-item"><span>Timeline</span><p>Sept &mdash; Nov 2025</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Procreate, Illustrator, InDesign</p></div>
+                        <div class="info-item"><span>Context</span><p>University Module</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Designed custom heritage patterns paired with structured textual hierarchy research to deliver a distributable leaflet celebrating community culture.
                 </p>
@@ -719,11 +909,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">Strata</span>
-                    <span class="project-category">Web Design</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Web Design</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Interactive Web Concept</p></div>
+                        <div class="info-item"><span>Timeline</span><p>Nov 2025 &mdash; Jan 2026</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>HTML, Figma</p></div>
+                        <div class="info-item"><span>Context</span><p>University Concept</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Applied responsive viewport mechanics and fluid CSS typography to treat web browsers as luxury print artboards with asymmetrical brutalist grids.
                 </p>
@@ -738,11 +939,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">John Lewis</span>
-                    <span class="project-category">Branding</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Branding</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A conceptual packaging evolution assignment stripping away decorative ornament components to highlight product geometry, resulting in an elegant solution.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Packaging System & Illustrations</p></div>
+                        <div class="info-item"><span>Timeline</span><p>Feb &mdash; May 2025</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Procreate, Illustrator, Photoshop</p></div>
+                        <div class="info-item"><span>Context</span><p>University Brief</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Focused on creating a playful, memorable unboxing experience utilizing vintage illustration styles to evoke nostalgia.
                 </p>
@@ -757,11 +969,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">Mosaic Events</span>
-                    <span class="project-category">Corporate Identity</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Corporate Identity</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A strategic anniversary identity evolution for a regional event management corporation engineered to integrate seamlessly into active digital touchpoints.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Rebrand Mark, Event Wayfinding</p></div>
+                        <div class="info-item"><span>Timeline</span><p>Nov 2022 &mdash; Aug 2024</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Illustrator, InDesign</p></div>
+                        <div class="info-item"><span>Context</span><p>Mosaic Events (York)</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Combined spatial layout engineering and digital documentation systems to produce a versatile 20th-anniversary celebratory visual mark.
                 </p>
@@ -776,11 +999,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">The Dick Turpin</span>
-                    <span class="project-category">Sponsorship Collaboration</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Sponsorship Collaboration</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A sponsor creation based off an existing chalk illustration within the pub on a blackboard, transferred across all versions of a local football club kit.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>Vector Kit Graphics</p></div>
+                        <div class="info-item"><span>Timeline</span><p>April 2025</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Vector Tracing, Illustrator</p></div>
+                        <div class="info-item"><span>Context</span><p>The Dick Turpin / York R.I</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Converted tactile chalk art into high-contrast vector assets optimized for screen printing on modern sportswear fabrics.
                 </p>
@@ -795,11 +1029,22 @@
             <div class="project-content">
                 <div class="project-meta">
                     <span class="project-title">Shiny Thomas</span>
-                    <span class="project-category">Branding</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Branding</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
                 </div>
                 <p class="project-description">
                     A long-term collaboration with a local artist spanning 2021 through 2025. Album and single covers designed and distributed across major streaming services.
                 </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Deliverables</span><p>12 Album & Single Covers</p></div>
+                        <div class="info-item"><span>Timeline</span><p>July 2021 &mdash; Sept 2025</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Photoshop, Mixed Media</p></div>
+                        <div class="info-item"><span>Context</span><p>Local Artist Collaboration</p></div>
+                    </div>
+                </div>
                 <p class="project-process">
                     <strong>Process:</strong> Designed a systematic visual language across 12 release covers, spanning an archival pandemic series to contemporary digital album artwork.
                 </p>
@@ -880,6 +1125,23 @@
             });
         });
 
+        // Toggle Quick Specs Info Panel
+        document.querySelectorAll('.info-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projectContent = btn.closest('.project-content');
+                const infoDrawer = projectContent.querySelector('.project-quick-info');
+                
+                btn.classList.toggle('active');
+                infoDrawer.classList.toggle('active');
+
+                if (btn.classList.contains('active')) {
+                    btn.textContent = '- Close';
+                } else {
+                    btn.textContent = '+ Info';
+                }
+            });
+        });
+
         // Alternating Layouts and Smooth Clip-Path Reveal Animations
         function setupRowsAndAnimations() {
             let visibleIndex = 1; 
@@ -896,7 +1158,6 @@
                     const imgContainer = row.querySelector('.image-container');
                     const img = row.querySelector('.image-container img');
 
-                    // Fade in row content
                     gsap.to(row, {
                         opacity: 1,
                         duration: 0.8,
@@ -908,7 +1169,6 @@
                         }
                     });
 
-                    // Sleek curtain reveal on image container
                     gsap.to(imgContainer, {
                         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
                         duration: 1.2,
@@ -920,7 +1180,6 @@
                         }
                     });
 
-                    // Smooth zoom out effect on inner image
                     gsap.to(img, {
                         scale: 1,
                         duration: 1.4,
