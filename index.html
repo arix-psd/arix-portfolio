@@ -43,6 +43,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
         }
 
         ::selection {
@@ -306,7 +307,6 @@
             gap: 5rem;
             align-items: center;
             opacity: 0; 
-            transform: translateY(30px);
         }
 
         .project-row.hidden {
@@ -323,6 +323,7 @@
             order: 1;
         }
 
+        /* Sleek Reveal Animation Container */
         .image-container {
             width: 100%;
             aspect-ratio: 4 / 3; 
@@ -331,7 +332,8 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 1.5rem;
-            cursor: pointer;
+            position: relative;
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
             transition: border-color 0.4s ease, background-color 0.4s ease;
         }
 
@@ -340,7 +342,8 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%); 
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+            transform: scale(1.2);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
             border-radius: 4px;
         }
 
@@ -349,7 +352,7 @@
         }
 
         .image-container:hover img {
-            transform: scale(1.02);
+            transform: scale(1.03) !important;
             filter: grayscale(0%);
         }
 
@@ -386,146 +389,16 @@
             color: var(--meta-color);
             line-height: 1.6;
             font-weight: 300;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .view-case-study {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-color);
-            background: transparent;
-            border: 1px solid var(--btn-border);
-            padding: 0.8rem 1.8rem;
-            cursor: pointer;
-            align-self: flex-start;
-            border-radius: 4px;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-
-        .view-case-study:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-
-        /* Case Study Modal */
-        .case-study-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-color);
-            z-index: 1000;
-            display: none;
-            overflow-y: auto;
-            padding: 6rem 4rem;
-        }
-
-        .case-study-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .cs-left-pane {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-            position: sticky;
-            top: 6rem;
-        }
-
-        .close-btn {
-            position: fixed;
-            top: 2rem;
-            right: 4rem;
-            background: transparent;
-            border: 1px solid var(--btn-border);
-            border-radius: 4px;
-            padding: 0.6rem 1.2rem;
-            color: var(--text-color);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            cursor: pointer;
-            z-index: 1001;
-            transition: background-color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-
-        .cs-header h4 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--sub-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .cs-header h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-        }
-
-        .cs-meta-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 2rem 0;
-        }
-
-        .cs-meta-item span {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--meta-color);
-            margin-bottom: 0.25rem;
-        }
-
-        .cs-meta-item p {
-            font-size: 1rem;
-            color: var(--text-color);
-            font-weight: 300;
-        }
-
-        .cs-text-blocks {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .cs-section h3 {
+        .project-process {
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .cs-section p {
-            font-size: 1rem;
-            color: var(--meta-color);
-            line-height: 1.6;
+            color: var(--sub-color);
+            line-height: 1.5;
             font-weight: 300;
-        }
-
-        .cs-right-pane img {
-            width: 100%;
-            height: auto;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-left: 2px solid var(--border-color);
+            padding-left: 1rem;
         }
 
         /* Instagram Section */
@@ -578,6 +451,8 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             overflow: hidden;
+            position: relative;
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
         }
 
         .insta-card img {
@@ -585,11 +460,12 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: transform 0.6s ease, filter 0.6s ease;
+            transform: scale(1.2);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .insta-card:hover img {
-            transform: scale(1.03);
+            transform: scale(1.03) !important;
             filter: grayscale(0%);
         }
 
@@ -707,9 +583,6 @@
             .instagram-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
             .form-row { grid-template-columns: 1fr; }
-            .case-study-overlay { padding: 4rem 2rem; }
-            .case-study-content { grid-template-columns: 1fr; gap: 3rem; }
-            .cs-left-pane { position: static; }
         }
     </style>
 
@@ -733,7 +606,7 @@
         <div class="drawer-links">
             <a href="#hero" class="drawer-link">Home</a>
             <a href="#portfolio-nav" class="drawer-link">Selected Work</a>
-            <a href="#portfolio-intro" class="drawer-link">About & Process</a>
+            <a href="#portfolio-intro" class="drawer-link">About</a>
             <a href="#instagram-feed" class="drawer-link">Instagram</a>
             <a href="#portfolio-footer" class="drawer-link">Contact</a>
         </div>
@@ -750,7 +623,7 @@
         </div>
         <div class="hero-grid">
             <p class="hero-bio">
-                Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU.
+                Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU[cite: 1].
             </p>
             <div class="hero-scroll-indicator">
                 <div class="scroll-line"></div>
@@ -759,15 +632,15 @@
         </div>
     </section>
 
-    <!-- Brief Portfolio Intro & Context -->
+    <!-- Brief Portfolio Intro -->
     <section class="intro-section" id="portfolio-intro">
         <div class="intro-column">
             <h2>Welcome</h2>
-            <p>Welcome to my digital portfolio! This workspace serves as a curated space displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums.</p>
+            <p>Welcome to my digital portfolio[cite: 1]! This workspace serves as a curated space displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums[cite: 1].</p>
         </div>
         <div class="intro-column">
             <h2>Development Statement</h2>
-            <p>This webpage was custom programmed from scratch using raw HTML layout logic and JavaScript GSAP animation engines for flawless, high-performance visual handling.</p>
+            <p>This webpage was custom programmed from scratch using raw HTML layout logic and JavaScript GSAP animation engines for flawless, high-performance visual handling[cite: 1].</p>
         </div>
     </section>
 
@@ -782,7 +655,7 @@
     <main class="portfolio-container">
 
         <!-- T.U.R.F -->
-        <div class="project-row" data-category="university" data-project="turf">
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="TURF.png" alt="Experimental Typography Layout">
             </div>
@@ -792,14 +665,16 @@
                     <span class="project-category">Campaign</span>
                 </div>
                 <p class="project-description">
-                    An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. Built to push the boundaries of legibility using calculated line weight distortion.
+                    An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions[cite: 1]. Built to push the boundaries of legibility using calculated line weight distortion[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Created imagery directly from surrounding architecture[cite: 1]. Photographs were converted into vector shapes and abstracted to form campaign assets across app, web, and poster mediums[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- Drift App Interface -->
-        <div class="project-row" data-category="freelance" data-project="drift">
+        <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Drift.png" alt="Drift App Project">
             </div>
@@ -809,14 +684,16 @@
                     <span class="project-category">UI / UX</span>
                 </div>
                 <p class="project-description">
-                    A weather-based social media application for Android. Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements.
+                    A weather-based social media application for Android[cite: 1]. Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Developed through iterative UI/UX exploration[cite: 1], coding 54 distinct prototypes in Kotlin using Android Studio to refine the final interface design[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- Beer Culture -->
-        <div class="project-row" data-category="university" data-project="beer">
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Beer.png" alt="Beer Campaign">
             </div>
@@ -826,14 +703,16 @@
                     <span class="project-category">Campaign</span>
                 </div>
                 <p class="project-description">
-                    A promotional layout strategy bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.
+                    A promotional layout strategy bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Designed custom heritage patterns paired with structured textual hierarchy research to deliver a distributable leaflet celebrating community culture[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- Strata -->
-        <div class="project-row" data-category="university" data-project="strata">
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Strata.png" alt="Strata Visual Identity">
             </div>
@@ -843,14 +722,16 @@
                     <span class="project-category">Web Design</span>
                 </div>
                 <p class="project-description">
-                    A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture.
+                    A modern editorial digital environment concept[cite: 1]. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Applied responsive viewport mechanics and fluid CSS typography to treat web browsers as luxury print artboards with asymmetrical brutalist grids[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- John Lewis -->
-        <div class="project-row" data-category="university" data-project="johnlewis">
+        <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="John Lewis.png" alt="John Lewis Packaging">
             </div>
@@ -860,14 +741,16 @@
                     <span class="project-category">Branding</span>
                 </div>
                 <p class="project-description">
-                    A conceptual packaging evolution assignment stripping away decorative ornament components to highlight product geometry, resulting in an elegant solution.
+                    A conceptual packaging evolution assignment stripping away decorative ornament components to highlight product geometry, resulting in an elegant solution[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Focused on creating a playful, memorable unboxing experience utilizing vintage illustration styles to evoke nostalgia[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- Mosaic Events -->
-        <div class="project-row" data-category="freelance" data-project="mosaic">
+        <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Mosaic.png" alt="Mosaic Events">
             </div>
@@ -877,14 +760,16 @@
                     <span class="project-category">Corporate Identity</span>
                 </div>
                 <p class="project-description">
-                    A strategic anniversary identity evolution for a regional event management corporation engineered to integrate seamlessly into active digital touchpoints.
+                    A strategic anniversary identity evolution for a regional event management corporation engineered to integrate seamlessly into active digital touchpoints[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Combined spatial layout engineering and digital documentation systems to produce a versatile 20th-anniversary celebratory visual mark[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- The Dick Turpin -->
-        <div class="project-row" data-category="freelance" data-project="football">
+        <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Turpin.png" alt="The Dick Turpin">
             </div>
@@ -894,14 +779,16 @@
                     <span class="project-category">Sponsorship Collaboration</span>
                 </div>
                 <p class="project-description">
-                    A sponsor creation based off an existing chalk illustration within the pub on a blackboard, transferred across all versions of a local football club kit.
+                    A sponsor creation based off an existing chalk illustration within the pub on a blackboard, transferred across all versions of a local football club kit[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Converted tactile chalk art into high-contrast vector assets optimized for screen printing on modern sportswear fabrics[cite: 1].
+                </p>
             </div>
         </div>
 
         <!-- Shiny Thomas -->
-        <div class="project-row" data-category="freelance" data-project="shiny">
+        <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="shinycovers.png" alt="Shiny Thomas Covers">
             </div>
@@ -911,19 +798,15 @@
                     <span class="project-category">Branding</span>
                 </div>
                 <p class="project-description">
-                    A long-term collaboration with a local artist spanning 2021 through 2025. Album and single covers designed and distributed across major streaming services.
+                    A long-term collaboration with a local artist spanning 2021 through 2025[cite: 1]. Album and single covers designed and distributed across major streaming services[cite: 1].
                 </p>
-                <button class="view-case-study">Open Project</button>
+                <p class="project-process">
+                    <strong>Process:</strong> Designed a systematic visual language across 12 release covers[cite: 1], spanning an archival pandemic series to contemporary digital album artwork[cite: 1].
+                </p>
             </div>
         </div>
 
     </main>
-
-    <!-- Dynamic Case Study Overlay -->
-    <div class="case-study-overlay" id="case-study-overlay">
-        <button class="close-btn" id="close-case-study">Close</button>
-        <div class="case-study-content" id="case-study-dynamic-content"></div>
-    </div>
 
     <!-- Instagram Feed Gallery -->
     <section class="instagram-section" id="instagram-feed">
@@ -952,7 +835,7 @@
         <div class="footer-grid">
             <div class="footer-cta">
                 <h3>Enquiries</h3>
-                <p>Have a project in mind, commission enquiry, or collaboration proposal? Drop your details below.</p>
+                <p>Have a project in mind, commission enquiry, or collaboration proposal? Drop your details below[cite: 1].</p>
                 <a href="mailto:arix.psd@gmail.com">arix.psd@gmail.com</a>
             </div>
             <div>
@@ -967,14 +850,14 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 arix.psd. All rights reserved.</p>
+            <p>&copy; 2026 arix.psd. All rights reserved[cite: 1].</p>
         </div>
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hamburger Menu Toggle Functionality
+        // Navigation Menu Drawer Toggle
         const menuToggle = document.getElementById('menu-toggle');
         const navDrawer = document.getElementById('nav-drawer');
         const drawerLinks = document.querySelectorAll('.drawer-link');
@@ -997,7 +880,7 @@
             });
         });
 
-        // Alternating Layouts and GSAP Animations
+        // Alternating Layouts and Smooth Clip-Path Reveal Animations
         function setupRowsAndAnimations() {
             let visibleIndex = 1; 
 
@@ -1010,14 +893,41 @@
                     }
                     visibleIndex++;
 
+                    const imgContainer = row.querySelector('.image-container');
+                    const img = row.querySelector('.image-container img');
+
+                    // Fade in row content
                     gsap.to(row, {
                         opacity: 1,
-                        y: 0,
-                        duration: 1,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    });
+
+                    // Sleek curtain reveal on image container
+                    gsap.to(imgContainer, {
+                        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                        duration: 1.2,
+                        ease: "power4.inOut",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 80%",
+                            toggleActions: "play none none none"
+                        }
+                    });
+
+                    // Smooth zoom out effect on inner image
+                    gsap.to(img, {
+                        scale: 1,
+                        duration: 1.4,
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: row,
-                            start: "top 85%", 
+                            start: "top 80%",
                             toggleActions: "play none none none"
                         }
                     });
@@ -1027,7 +937,34 @@
 
         setupRowsAndAnimations();
 
-        // Project Filtering
+        // Instagram Cards Reveal
+        gsap.utils.toArray(".insta-card").forEach((card) => {
+            const img = card.querySelector('img');
+
+            gsap.to(card, {
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                duration: 1.2,
+                ease: "power4.inOut",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.to(img, {
+                scale: 1,
+                duration: 1.4,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+
+        // Category Filter Logic
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectRows = document.querySelectorAll('.project-row');
 
@@ -1040,14 +977,17 @@
 
                 gsap.to(projectRows, {
                     opacity: 0,
-                    y: 20,
                     duration: 0.3,
                     onComplete: () => {
                         projectRows.forEach(row => {
                             const rowCategory = row.getAttribute('data-category');
                             if (targetCategory === 'all' || rowCategory === targetCategory) {
                                 row.classList.remove('hidden');
-                                gsap.set(row, { opacity: 0, y: 30 });
+                                gsap.set(row, { opacity: 0 });
+                                const imgContainer = row.querySelector('.image-container');
+                                const img = row.querySelector('.image-container img');
+                                gsap.set(imgContainer, { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" });
+                                gsap.set(img, { scale: 1.2 });
                             } else {
                                 row.classList.add('hidden');
                             }
@@ -1060,151 +1000,7 @@
             });
         });
 
-        // Case Study Data Source
-        const projectTemplates = {
-            turf: {
-                title: "T.U.R.F",
-                category: "Campaign",
-                client: "University Module",
-                role: "Experimental Typography / Mental Health Campaign",
-                date: "February - May 2026",
-                imgSrc: "TURF.png",
-                description: "An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. It is built to push the boundaries of legibility using calculated line weight distortion and harsh geometric layouts designed for physical print mediums.",
-                process: "To build my outcomes, I decided to create imagery directly from the world around me. I first took photographs of my flat and the street I live on and turned these into vector shapes. From here I abstracted the shapes to form assets for my campaign which were later translated into app, web and poster design."
-            },
-            drift: {
-                title: "Drift App Interface",
-                category: "UI / UX",
-                client: "Community Project",
-                role: "Interface Design / App Coding",
-                date: "March - April 2026 &mdash; <a href='https://drive.google.com/drive/folders/1J3Sv1WU1nMHN-EiysjWQCVuKKYRVu_E3' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Download APK File ↗</a>",
-                imgSrc: "Drift.png",
-                description: "A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.",
-                process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weather was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun."
-            },
-            beer: {
-                title: "Beer Culture",
-                category: "Campaign",
-                client: "University Module",
-                role: "Layout Design",
-                date: "September - November 2025",
-                imgSrc: "Beer.png",
-                description: "A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.",
-                process: "To pull this design together, I decided to create my own patterns in the style of designers such as William Morris. After this, I researched text layout and structure and the best possible way of creating a design that resembles community."
-            },
-            strata: {
-                title: "Strata",
-                category: "Web Design",
-                client: "University Module (Nothing, Rabbit, Teenage Engineering + Analogue)",
-                role: "Editorial Design / Concept UI/UX",
-                date: "November 2025 - January 2026",
-                imgSrc: "Strata.png",
-                description: "A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture and interior systems.",
-                process: "The digital execution utilized a rigid responsive viewport system to treat the web browser like an elite print layout asset. Typographic scale parameters were set up using custom fluid CSS mechanics."
-            },
-            johnlewis: {
-                title: "John Lewis",
-                category: "Branding",
-                client: "University Module",
-                role: "Packaging Rebrand Concept",
-                date: "February - May 2025",
-                imgSrc: "John Lewis.png",
-                description: "A conceptual packaging evolution assignment. Stripping away decorative ornament components to highlight product geometry, resulting in an elegant and timeless sustainable footprint solution.",
-                process: "This projects aim was to create a more playful and diverse unboxing experience for all ages. With this brief I decided I wanted to produce a piece of design that holds resonance and memories with viewers."
-            },
-            mosaic: {
-                title: "Mosaic Events",
-                category: "Corporate Identity",
-                client: "Mosaic Events (York)",
-                role: "Event Operations, Spatial Layouts & Identity Evolution",
-                date: "Nov 2022 - Aug 2024 &mdash; <a href='https://mosaicevents.co.uk/' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit Live Site ↗</a>",
-                imgSrc: "Mosaic.png",
-                description: "A multi-year operational tenure involving on-site event management, structural spatial layout design, and digital document architecture, culminating in a specialized 20th-anniversary celebratory identity rebrand.",
-                process: "My tenure spanned both spatial logistics and graphic architecture. Initial operations focused on documentation management, content capturing, and on-site spatial engineering."
-            },
-            football: {
-                title: "The Dick Turpin",
-                category: "Sponsorship Collaboration",
-                client: "The Dick Turpin / York R.I (York)",
-                role: "Sponsor Football Kit Design",
-                date: "April 2025",
-                imgSrc: "Turpin.png",
-                description: "A sponsor creation based off an existing chalk illustration within the pub on a blackboard. This was then transferred to all versions of a local football club.",
-                process: "The design process focused on converting the hand-drawn, tactile qualities of the original blackboard illustration into a high-contrast vector graphic suitable for screen printing on kit textiles."
-            },
-            shiny: {
-                title: "Shiny Thomas",
-                category: "Branding",
-                client: "Shiny Thomas",
-                role: "Local Artist Branding",
-                date: "July 2021 - Sept 2025 &mdash; <a href='https://open.spotify.com/artist/0t4QywJUYA7Jw0Aa4WXg9a?si=M0nvguzXSEqMcn8UCNaWYw' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit On Spotify ↗</a>",
-                imgSrc: "shinycovers.png",
-                description: "A collaboration with a local artist that began during lockdown and panned out to 2025. Album and single covers were designed to push the artists music forward.",
-                process: "Initiated during the 2021 lockdowns, this long-term branding collaboration evolved into an expansive catalog of 12 total album covers for local musician Shiny Thomas."
-            }
-        };
-
-        // Modal Handling
-        const overlay = document.getElementById('case-study-overlay');
-        const dynamicContent = document.getElementById('case-study-dynamic-content');
-        const closeBtn = document.getElementById('close-case-study');
-
-        document.querySelectorAll('.project-row').forEach(row => {
-            row.addEventListener('click', (e) => {
-                if (e.target.classList.contains('view-case-study') || e.target.closest('.image-container')) {
-                    const projectId = row.getAttribute('data-project').toLowerCase();
-                    const data = projectTemplates[projectId];
-                    
-                    if (data) {
-                        dynamicContent.innerHTML = `
-                            <div class="cs-left-pane">
-                                <div class="cs-header">
-                                    <h4>${data.category}</h4>
-                                    <h2>${data.title}</h2>
-                                </div>
-                                <div class="cs-meta-grid">
-                                    <div class="cs-meta-item"><span>Client / context</span><p>${data.client}</p></div>
-                                    <div class="cs-meta-item"><span>Role / discipline</span><p>${data.role}</p></div>
-                                    <div class="cs-meta-item"><span>Timeline</span><p>${data.date}</p></div>
-                                </div>
-                                <div class="cs-text-blocks">
-                                    <div class="cs-section">
-                                        <h3>Overview</h3>
-                                        <p>${data.description}</p>
-                                    </div>
-                                    <div class="cs-section">
-                                        <h3>Process & execution</h3>
-                                        <p>${data.process}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cs-right-pane">
-                                <img src="${data.imgSrc}" alt="${data.title} Artwork">
-                            </div>
-                        `;
-                        
-                        document.body.style.overflow = 'hidden';
-                        overlay.style.display = 'block';
-                        overlay.scrollTop = 0;
-                        
-                        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4 });
-                    }
-                }
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            gsap.to(overlay, {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => {
-                    overlay.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-
-        // Theme Toggle
+        // Dark/Light Theme Switching
         const toggleBtn = document.getElementById('theme-toggle');
         toggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
