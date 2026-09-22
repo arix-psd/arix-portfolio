@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,38 +7,42 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --bg-color: #080808;
+            --text-color: #f4f4f4;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --meta-color: #8a8a8a;
+            --sub-color: #aaaaaa;
+            --card-bg: #111111;
+            --selection-bg: #ffffff;
+            --selection-text: #000000;
+            --btn-border: rgba(255, 255, 255, 0.2);
+            --drawer-bg: rgba(12, 12, 12, 0.96);
+            --accent-color: #ff4500;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f9f9f9;
+            --text-color: #0d0d0d;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --meta-color: #666666;
+            --sub-color: #444444;
+            --card-bg: #ffffff;
+            --selection-bg: #000000;
+            --selection-text: #ffffff;
+            --btn-border: rgba(0, 0, 0, 0.2);
+            --drawer-bg: rgba(245, 245, 245, 0.96);
+            --accent-color: #ff4500;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --border-color: #111111;
-            --meta-color: #888888;
-            --sub-color: #666666;
-            --card-bg: #0a0a0a;
-            --selection-bg: #ffffff;
-            --selection-text: #000000;
-            --btn-border: #222222;
-        }
-
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --border-color: #e5e5e5;
-            --meta-color: #555555;
-            --sub-color: #777777;
-            --card-bg: #f9f9f9;
-            --selection-bg: #000000;
-            --selection-text: #ffffff;
-            --btn-border: #cccccc;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         ::selection {
@@ -50,98 +54,219 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            padding: 4rem 2rem;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
+        /* Fixed Navigation Header */
         header {
-            max-width: 1200px;
-            margin: 0 auto 2rem auto; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 3rem;
             display: flex;
-            flex-direction: row;
             justify-content: space-between;
-            align-items: flex-start;
-            opacity: 0; 
-            transform: translateY(20px);
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
         }
 
-        .header-content {
+        /* 3-Line Hamburger Menu Button */
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 6px;
+            padding: 0.5rem;
+            z-index: 102;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .brand-logo {
+            font-size: 1.25rem;
             font-weight: 700;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.04em;
             text-transform: lowercase;
+            color: #ffffff;
+            text-decoration: none;
         }
 
-        p.bio {
-            font-size: 1rem;
+        /* Fullscreen Navigation Drawer */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--drawer-bg);
+            backdrop-filter: blur(15px);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8rem 4rem 4rem 4rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-drawer.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .drawer-links a {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: -0.04em;
+            transition: transform 0.3s ease, color 0.3s ease;
+            width: fit-content;
+        }
+
+        .drawer-links a:hover {
+            transform: translateX(15px);
             color: var(--meta-color);
-            max-width: 500px;
-            line-height: 1.5;
-            font-weight: 300;
+        }
+
+        .drawer-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
         }
 
         .theme-toggle {
-            background: none;
+            background: transparent;
             border: 1px solid var(--btn-border);
             color: var(--text-color);
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             cursor: pointer;
-            transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .theme-toggle:hover {
             border-color: var(--text-color);
         }
 
+        /* Hero Landing Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10rem 4rem 4rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            text-transform: lowercase;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: end;
+        }
+
+        .hero-bio {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--meta-color);
+            font-weight: 300;
+            max-width: 580px;
+        }
+
+        .hero-scroll-indicator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sub-color);
+            justify-self: end;
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background-color: var(--sub-color);
+        }
+
+        /* Intro Section */
         .intro-section {
-            max-width: 1200px;
-            margin: 0 auto 5rem auto;
+            max-width: 1400px;
+            margin: 0 auto 6rem auto;
+            padding: 4rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 2.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: border-color 0.4s ease;
         }
 
         .intro-column h2 {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--meta-color);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
         .intro-column p {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             color: var(--sub-color);
             line-height: 1.6;
             font-weight: 300;
-            max-width: 480px;
         }
 
+        /* Portfolio Filter Nav */
         .category-nav {
-            max-width: 1200px;
-            margin: 0 auto 6rem auto;
+            max-width: 1400px;
+            margin: 0 auto 4rem auto;
+            padding: 0 4rem 1.5rem 4rem;
             display: flex;
             gap: 2.5rem;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.2rem;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: border-color 0.4s ease;
         }
 
         .filter-btn {
@@ -149,7 +274,7 @@
             border: none;
             color: var(--sub-color);
             font-size: 0.85rem;
-            font-weight: 400;
+            font-weight: 500;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -157,18 +282,19 @@
             padding: 0;
         }
 
-        .filter-btn:hover {
+        .filter-btn:hover, .filter-btn.active {
             color: var(--text-color);
         }
 
         .filter-btn.active {
-            color: var(--text-color);
             font-weight: 700;
         }
 
+        /* Project Layouts */
         .portfolio-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 4rem;
             display: flex;
             flex-direction: column;
             gap: 8rem; 
@@ -177,10 +303,10 @@
         .project-row {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr; 
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
             opacity: 0; 
-            transform: scale(0.98) translateY(30px);
+            transform: translateY(30px);
         }
 
         .project-row.hidden {
@@ -203,6 +329,7 @@
             overflow: hidden;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             cursor: pointer;
             transition: border-color 0.4s ease, background-color 0.4s ease;
@@ -214,7 +341,7 @@
             object-fit: cover;
             filter: grayscale(100%); 
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
-            border-radius: 8px;
+            border-radius: 4px;
         }
 
         .image-container:hover {
@@ -222,7 +349,7 @@
         }
 
         .image-container:hover img {
-            transform: scale(1.03);
+            transform: scale(1.02);
             filter: grayscale(0%);
         }
 
@@ -239,65 +366,41 @@
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            transition: border-color 0.4s ease;
-        }
-
-        .title-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .status-badge {
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #ff4500;
-            border: 1px solid #ff4500;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            display: inline-block;
-            line-height: 1;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.03em;
         }
 
         .project-category {
-            font-size: 0.85rem;
-            color: var(--sub-color);
+            font-size: 0.8rem;
+            color: var(--meta-color);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .project-description {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--meta-color);
             line-height: 1.6;
             font-weight: 300;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .view-case-study {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             color: var(--text-color);
             background: transparent;
             border: 1px solid var(--btn-border);
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             cursor: pointer;
-            align-start: flex-start;
+            align-self: flex-start;
+            border-radius: 4px;
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-
-        .project-row:hover .view-case-study {
-            border-color: var(--text-color);
         }
 
         .view-case-study:hover {
@@ -305,6 +408,7 @@
             color: var(--bg-color);
         }
 
+        /* Case Study Modal */
         .case-study-overlay {
             position: fixed;
             top: 0;
@@ -315,12 +419,11 @@
             z-index: 1000;
             display: none;
             overflow-y: auto;
-            padding: 5rem 4rem;
-            transition: background-color 0.4s ease;
+            padding: 6rem 4rem;
         }
 
         .case-study-content {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1.1fr;
@@ -333,7 +436,7 @@
             flex-direction: column;
             gap: 2.5rem;
             position: sticky;
-            top: 5rem;
+            top: 6rem;
         }
 
         .close-btn {
@@ -341,22 +444,25 @@
             top: 2rem;
             right: 4rem;
             background: transparent;
-            border: none;
-            color: var(--sub-color);
-            font-size: 0.85rem;
+            border: 1px solid var(--btn-border);
+            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            color: var(--text-color);
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             cursor: pointer;
             z-index: 1001;
-            transition: color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .close-btn:hover {
-            color: var(--text-color);
+            background-color: var(--text-color);
+            color: var(--bg-color);
         }
 
         .cs-header h4 {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--sub-color);
@@ -364,7 +470,7 @@
         }
 
         .cs-header h2 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             letter-spacing: -0.04em;
         }
@@ -376,20 +482,19 @@
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             padding: 2rem 0;
-            transition: border-color 0.4s ease;
         }
 
         .cs-meta-item span {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--sub-color);
+            color: var(--meta-color);
             margin-bottom: 0.25rem;
         }
 
         .cs-meta-item p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-color);
             font-weight: 300;
         }
@@ -397,86 +502,68 @@
         .cs-text-blocks {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .cs-section {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            gap: 2rem;
         }
 
         .cs-section h3 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--text-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.4rem;
-            transition: border-color 0.4s ease;
+            margin-bottom: 0.5rem;
         }
 
         .cs-section p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--meta-color);
             line-height: 1.6;
             font-weight: 300;
         }
 
-        .cs-right-pane {
-            width: 100%;
-        }
-
-        .cs-main-image {
+        .cs-right-pane img {
             width: 100%;
             height: auto;
-            object-fit: contain;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: border-color 0.4s ease, background-color 0.4s ease;
+            border-radius: 6px;
         }
 
-        /* Instagram Section Styling with proper spacing & button */
+        /* Instagram Section */
         .instagram-section {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 10rem auto 0 auto;
+            padding: 4rem 4rem 0 4rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 4rem;
-            transition: border-color 0.4s ease;
         }
 
         .instagram-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .instagram-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: -0.03em;
-            text-transform: uppercase;
         }
 
         .instagram-btn {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--text-color);
-            background: transparent;
+            text-decoration: none;
             border: 1px solid var(--btn-border);
             padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
         .instagram-btn:hover {
             background-color: var(--text-color);
             color: var(--bg-color);
-            border-color: var(--text-color);
         }
 
         .instagram-grid {
@@ -489,10 +576,8 @@
             aspect-ratio: 1 / 1;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
+            border-radius: 6px;
             overflow: hidden;
-            position: relative;
-            display: block;
-            transition: border-color 0.4s ease;
         }
 
         .insta-card img {
@@ -500,11 +585,7 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .insta-card:hover {
-            border-color: var(--btn-border);
+            transition: transform 0.6s ease, filter 0.6s ease;
         }
 
         .insta-card:hover img {
@@ -512,53 +593,41 @@
             filter: grayscale(0%);
         }
 
+        /* Footer */
         footer {
-            max-width: 1200px;
-            margin: 12rem auto 4rem auto;
+            max-width: 1400px;
+            margin: 10rem auto 4rem auto;
+            padding: 4rem 4rem 0 4rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: border-color 0.4s ease;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 0.8fr 1.2fr;
-            gap: 4rem;
+            gap: 5rem;
+            margin-bottom: 6rem;
         }
 
         .footer-cta h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.04em;
-            text-transform: uppercase;
             margin-bottom: 1rem;
         }
 
         .footer-cta p {
-            font-size: 0.95rem;
-            color: var(--sub-color);
-            line-height: 1.5;
+            font-size: 1rem;
+            color: var(--meta-color);
+            line-height: 1.6;
+            margin-bottom: 2rem;
             font-weight: 300;
-            margin-bottom: 1.5rem;
         }
 
         .footer-cta a {
             font-size: 1rem;
             color: var(--text-color);
-            text-decoration: none;
-            font-weight: 400;
-            border-bottom: 1px solid var(--btn-border);
-            padding-bottom: 0.2rem;
-            transition: border-color 0.3s ease, color 0.3s ease;
-        }
-
-        .footer-cta a:hover {
-            border-color: var(--text-color);
+            text-decoration: underline;
+            text-underline-offset: 4px;
         }
 
         .enquiry-form {
@@ -573,37 +642,24 @@
             gap: 1.5rem;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .enquiry-form input, 
-        .enquiry-form textarea {
+        .enquiry-form input, .enquiry-form textarea {
             background-color: transparent;
             border: none;
             border-bottom: 1px solid var(--btn-border);
             color: var(--text-color);
-            padding: 0.8rem 0;
+            padding: 1rem 0;
             font-size: 0.95rem;
-            font-weight: 300;
             outline: none;
-            transition: border-color 0.4s ease, color 0.4s ease;
+            transition: border-color 0.3s ease;
         }
 
-        .enquiry-form input::placeholder, 
-        .enquiry-form textarea::placeholder {
-            color: var(--sub-color);
-        }
-
-        .enquiry-form input:focus, 
-        .enquiry-form textarea:focus {
+        .enquiry-form input:focus, .enquiry-form textarea:focus {
             border-color: var(--text-color);
         }
 
         .enquiry-form textarea {
             resize: none;
-            height: 100px;
+            height: 120px;
         }
 
         .submit-btn {
@@ -612,12 +668,13 @@
             color: var(--bg-color);
             border: none;
             padding: 1rem 2.5rem;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             cursor: pointer;
-            transition: opacity 0.3s ease, background-color 0.4s ease, color 0.4s ease;
+            border-radius: 4px;
+            transition: opacity 0.3s ease;
         }
 
         .submit-btn:hover {
@@ -629,43 +686,30 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            transition: border-color 0.4s ease;
-        }
-
-        .footer-bottom p {
+            padding-top: 2rem;
             font-size: 0.85rem;
-            color: var(--sub-color);
-            font-weight: 300;
+            color: var(--meta-color);
         }
 
+        /* Responsive Breakpoints */
         @media (max-width: 900px) {
-            body { padding: 2rem 1rem; }
-            header { margin-bottom: 3rem; flex-direction: column; gap: 1.5rem; }
-            .intro-section { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
-            .category-nav { margin-bottom: 4rem; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.8rem; }
-            .portfolio-container { gap: 5rem; }
-            footer { margin-top: 8rem; gap: 3rem; }
-            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
-            .case-study-overlay { padding: 4rem 1rem; }
-            .case-study-content { grid-template-columns: 1fr; gap: 3rem; }
-            .cs-left-pane { position: static; gap: 2rem; }
-            .close-btn { right: 1.5rem; top: 1.5rem; }
-            
-            .project-row, .project-row.alternate-layout {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+            header { padding: 1.5rem 2rem; }
+            .hero-section { padding: 8rem 2rem 3rem 2rem; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-scroll-indicator { justify-self: start; }
+            .intro-section { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+            .category-nav { padding: 0 2rem 1rem 2rem; overflow-x: auto; gap: 1.5rem; }
+            .portfolio-container { padding: 0 2rem; gap: 5rem; }
+            .project-row, .project-row.alternate-layout { grid-template-columns: 1fr; gap: 2rem; }
             .project-row.alternate-layout .image-container { order: 1; }
             .project-row.alternate-layout .project-content { order: 2; }
-            
-            .image-container { aspect-ratio: 1 / 1; padding: 1rem; }
-            .instagram-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
+            .instagram-section, footer { padding: 3rem 2rem 0 2rem; }
+            .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .case-study-overlay { padding: 4rem 2rem; }
+            .case-study-content { grid-template-columns: 1fr; gap: 3rem; }
+            .cs-left-pane { position: static; }
         }
     </style>
 
@@ -674,179 +718,200 @@
 </head>
 <body>
 
-    <header id="portfolio-header">
-        <div class="header-content">
-            <h1>arix.psd</h1>
-            <p class="bio">Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU.</p>
-        </div>
-        <button class="theme-toggle" id="theme-toggle">Dark Mode</button>
+    <!-- Header Navigation Bar -->
+    <header>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="#hero" class="brand-logo">arix.psd</a>
     </header>
-    
+
+    <!-- Slide-Out Fullscreen Navigation Overlay -->
+    <div class="nav-drawer" id="nav-drawer">
+        <div class="drawer-links">
+            <a href="#hero" class="drawer-link">Home</a>
+            <a href="#portfolio-nav" class="drawer-link">Selected Work</a>
+            <a href="#portfolio-intro" class="drawer-link">About & Process</a>
+            <a href="#instagram-feed" class="drawer-link">Instagram</a>
+            <a href="#portfolio-footer" class="drawer-link">Contact</a>
+        </div>
+        <div class="drawer-footer">
+            <button class="theme-toggle" id="theme-toggle">Light Mode</button>
+            <span style="font-size: 0.85rem; color: var(--meta-color);">&copy; 2026 Albert Richardson</span>
+        </div>
+    </div>
+
+    <!-- Minimalist Hero Landing Area -->
+    <section class="hero-section" id="hero">
+        <div>
+            <h1 class="hero-title">arix.psd</h1>
+        </div>
+        <div class="hero-grid">
+            <p class="hero-bio">
+                Albert Richardson &mdash; Specialising in Experimental Typography and Illustration. BA Hons Level 5 Graphic Design at LAU.
+            </p>
+            <div class="hero-scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>Scroll to Explore</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brief Portfolio Intro & Context -->
     <section class="intro-section" id="portfolio-intro">
         <div class="intro-column">
             <h2>Welcome</h2>
             <p>Welcome to my digital portfolio! This workspace serves as a curated space displaying structural balance, visual identity system development, and conceptual editorial artboards across physical and digital mediums.</p>
         </div>
-        <div class="intro-column" style="display: flex; align-items: flex-end;">
-            <p class="tech-statement">This webpage was custom programmed from scratch using raw HTML layout logic and JavaScript GSAP animation engines for flawless, high-performance visual handling.</p>
+        <div class="intro-column">
+            <h2>Development Statement</h2>
+            <p>This webpage was custom programmed from scratch using raw HTML layout logic and JavaScript GSAP animation engines for flawless, high-performance visual handling.</p>
         </div>
     </section>
 
+    <!-- Category Filter Controls -->
     <nav class="category-nav" id="portfolio-nav">
         <button class="filter-btn active" data-target="all">All Projects</button>
         <button class="filter-btn" data-target="university">University</button>
         <button class="filter-btn" data-target="freelance">Freelance Workspace</button>
     </nav>
 
+    <!-- Main Portfolio Works Grid -->
     <main class="portfolio-container">
 
-        <!-- PROJECT 2: T.U.R.F (February - May 2026) -->
+        <!-- T.U.R.F -->
         <div class="project-row" data-category="university" data-project="turf">
             <div class="image-container">
                 <img src="TURF.png" alt="Experimental Typography Layout">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">T.U.R.F</span>
-                    </div>
+                    <span class="project-title">T.U.R.F</span>
                     <span class="project-category">Campaign</span>
                 </div>
                 <p class="project-description">
-                    An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. It is built to push the boundaries of legibility using calculated line weight distortion and harsh geometric layouts designed for physical print mediums.
+                    An exploratory campaign into heavy, aggressive typography structures recreating the effects of anxiety and other mental health conditions. Built to push the boundaries of legibility using calculated line weight distortion.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 3: Drift App Interface (March - April 2026) -->
+        <!-- Drift App Interface -->
         <div class="project-row" data-category="freelance" data-project="drift">
             <div class="image-container">
                 <img src="Drift.png" alt="Drift App Project">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">Drift App Interface</span>
-                    </div>
+                    <span class="project-title">Drift App Interface</span>
                     <span class="project-category">UI / UX</span>
                 </div>
                 <p class="project-description">
-                    A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.
+                    A weather-based social media application for Android. Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 4: Beer Culture (September - November 2025) -->
+        <!-- Beer Culture -->
         <div class="project-row" data-category="university" data-project="beer">
             <div class="image-container">
                 <img src="Beer.png" alt="Beer Campaign">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">Beer Culture</span>
-                    </div>
+                    <span class="project-title">Beer Culture</span>
                     <span class="project-category">Campaign</span>
                 </div>
                 <p class="project-description">
-                    A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.
+                    A promotional layout strategy bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 5: Strata (November 2025 - January 2026) -->
+        <!-- Strata -->
         <div class="project-row" data-category="university" data-project="strata">
             <div class="image-container">
                 <img src="Strata.png" alt="Strata Visual Identity">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">Strata</span>
-                    </div>
+                    <span class="project-title">Strata</span>
                     <span class="project-category">Web Design</span>
                 </div>
                 <p class="project-description">
-                    A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture and interior systems.
+                    A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 6: John Lewis (February - May 2025) -->
+        <!-- John Lewis -->
         <div class="project-row" data-category="university" data-project="johnlewis">
             <div class="image-container">
                 <img src="John Lewis.png" alt="John Lewis Packaging">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">John Lewis</span>
-                    </div>
+                    <span class="project-title">John Lewis</span>
                     <span class="project-category">Branding</span>
                 </div>
                 <p class="project-description">
-                    A conceptual packaging evolution assignment. Stripping away decorative ornament components to highlight product geometry, resulting in an elegant and timeless sustainable footprint solution.
+                    A conceptual packaging evolution assignment stripping away decorative ornament components to highlight product geometry, resulting in an elegant solution.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 7: Mosaic Events (November 2022 - August 2024) -->
+        <!-- Mosaic Events -->
         <div class="project-row" data-category="freelance" data-project="mosaic">
             <div class="image-container">
-                <img src="Mosaic.png" alt="Mosaic">
+                <img src="Mosaic.png" alt="Mosaic Events">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">Mosaic Events</span>
-                    </div>
+                    <span class="project-title">Mosaic Events</span>
                     <span class="project-category">Corporate Identity</span>
                 </div>
                 <p class="project-description">
-                    A strategic anniversary identity evolution for a regional event management corporation. Engineered to integrate seamlessly into active digital touchpoints, corporate communications, and high-visibility digital signatures.
+                    A strategic anniversary identity evolution for a regional event management corporation engineered to integrate seamlessly into active digital touchpoints.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 8: The Dick Turpin (April 2025) -->
+        <!-- The Dick Turpin -->
         <div class="project-row" data-category="freelance" data-project="football">
             <div class="image-container">
-                <img src="Turpin.png" alt="Turpin">
+                <img src="Turpin.png" alt="The Dick Turpin">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">The Dick Turpin</span>
-                    </div>
+                    <span class="project-title">The Dick Turpin</span>
                     <span class="project-category">Sponsorship Collaboration</span>
                 </div>
                 <p class="project-description">
-                    A sponsor creation based off an existing chalk illustration within the pub on a blackboard. This was then transferred to all versions of a local football club.
+                    A sponsor creation based off an existing chalk illustration within the pub on a blackboard, transferred across all versions of a local football club kit.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
         </div>
 
-        <!-- PROJECT 9: Shiny Thomas (July 2021 - August 2025) -->
+        <!-- Shiny Thomas -->
         <div class="project-row" data-category="freelance" data-project="shiny">
             <div class="image-container">
-                <img src="shinycovers.png" alt="shinycovers">
+                <img src="shinycovers.png" alt="Shiny Thomas Covers">
             </div>
             <div class="project-content">
                 <div class="project-meta">
-                    <div class="title-wrapper">
-                        <span class="project-title">Shiny Thomas</span>
-                    </div>
+                    <span class="project-title">Shiny Thomas</span>
                     <span class="project-category">Branding</span>
                 </div>
                 <p class="project-description">
-                    A collaboration with a local artist that began during lockdown and panned out to 2025. Album and single covers were designed to push the artists music forward which have been distributed on all major music streaming services.
+                    A long-term collaboration with a local artist spanning 2021 through 2025. Album and single covers designed and distributed across major streaming services.
                 </p>
                 <button class="view-case-study">Open Project</button>
             </div>
@@ -854,12 +919,13 @@
 
     </main>
 
+    <!-- Dynamic Case Study Overlay -->
     <div class="case-study-overlay" id="case-study-overlay">
-        <button class="close-btn" id="close-case-study">Close Project</button>
+        <button class="close-btn" id="close-case-study">Close</button>
         <div class="case-study-content" id="case-study-dynamic-content"></div>
     </div>
 
-    <!-- CLEANED UP INSTAGRAM SECTION WITH SPACED HEADER & BUTTON -->
+    <!-- Instagram Feed Gallery -->
     <section class="instagram-section" id="instagram-feed">
         <div class="instagram-header">
             <h3>Instagram Feed</h3>
@@ -881,26 +947,21 @@
         </div>
     </section>
 
+    <!-- Footer Enquiries Section -->
     <footer id="portfolio-footer">
         <div class="footer-grid">
             <div class="footer-cta">
                 <h3>Enquiries</h3>
                 <p>Have a project in mind, commission enquiry, or collaboration proposal? Drop your details below.</p>
-                <a href="mailto:arix.psd@gmail.com">For enquiries, email: arix.psd@gmail.com or use the messaging feature below.</a>
+                <a href="mailto:arix.psd@gmail.com">arix.psd@gmail.com</a>
             </div>
             <div>
                 <form class="enquiry-form" action="https://formspree.io/f/mbdeybnn" method="POST">
                     <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="YOUR NAME" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
-                        </div>
+                        <input type="text" name="name" placeholder="YOUR NAME" required>
+                        <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
                     </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="PROJECT DETAILS / MESSAGE" required></textarea>
-                    </div>
+                    <textarea name="message" placeholder="PROJECT DETAILS / MESSAGE" required></textarea>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
             </div>
@@ -913,16 +974,35 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.to("#portfolio-header", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" });
-        gsap.to("#portfolio-intro", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.15 });
-        gsap.to("#portfolio-nav", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: 0.3 });
+        // Hamburger Menu Toggle Functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const navDrawer = document.getElementById('nav-drawer');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
 
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navDrawer.classList.toggle('active');
+            if (navDrawer.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navDrawer.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Alternating Layouts and GSAP Animations
         function setupRowsAndAnimations() {
             let visibleIndex = 1; 
 
             gsap.utils.toArray(".project-row").forEach((row) => {
                 if (!row.classList.contains('hidden')) {
-                    
                     if (visibleIndex % 2 === 0) {
                         row.classList.add('alternate-layout');
                     } else {
@@ -933,8 +1013,7 @@
                     gsap.to(row, {
                         opacity: 1,
                         y: 0,
-                        scale: 1,
-                        duration: 1.2,
+                        duration: 1,
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: row,
@@ -948,17 +1027,7 @@
 
         setupRowsAndAnimations();
 
-        gsap.to("#portfolio-footer", {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: "#portfolio-footer",
-                start: "top 90%"
-            }
-        });
-
+        // Project Filtering
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectRows = document.querySelectorAll('.project-row');
 
@@ -969,25 +1038,16 @@
 
                 const targetCategory = btn.getAttribute('data-target');
 
-                ScrollTrigger.getAll().forEach(trigger => {
-                    if(trigger.vars.trigger !== "#portfolio-header" && trigger.vars.trigger !== "#portfolio-intro" && trigger.vars.trigger !== "#portfolio-nav" && trigger.vars.trigger !== "#portfolio-footer") {
-                        trigger.kill();
-                    }
-                });
-
                 gsap.to(projectRows, {
                     opacity: 0,
                     y: 20,
-                    scale: 0.98,
-                    duration: 0.4,
-                    stagger: 0.05,
+                    duration: 0.3,
                     onComplete: () => {
                         projectRows.forEach(row => {
                             const rowCategory = row.getAttribute('data-category');
-
                             if (targetCategory === 'all' || rowCategory === targetCategory) {
                                 row.classList.remove('hidden');
-                                gsap.set(row, { opacity: 0, y: 30, scale: 0.98 });
+                                gsap.set(row, { opacity: 0, y: 30 });
                             } else {
                                 row.classList.add('hidden');
                             }
@@ -1000,8 +1060,8 @@
             });
         });
 
+        // Case Study Data Source
         const projectTemplates = {
-           
             turf: {
                 title: "T.U.R.F",
                 category: "Campaign",
@@ -1020,7 +1080,7 @@
                 date: "March - April 2026 &mdash; <a href='https://drive.google.com/drive/folders/1J3Sv1WU1nMHN-EiysjWQCVuKKYRVu_E3' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Download APK File ↗</a>",
                 imgSrc: "Drift.png",
                 description: "A weather-based social media application for Android (adaptable for other operating systems). Transitioning complex database interactions into a minimal mobile interface that utilizes minimalistic screen elements to catch and direct a viewer's eye.",
-                process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weather was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun. I had back and forth conversations about how this app should look with my brother over a couple of months and coded 54 versions of the same app using Kotlin in Android Studio untill we came to the final version. (Please note that whilst I have linked the APK file above, this app has not been fully developed and may not work as expected)"
+                process: "The idea for this app actually stemmed from my younger brother who had the idea of an app used amongst friend groups to depict what they thought the weather was like and to give friends an idea of what to expect when they stepped foot out of their doors. This project was extremely experimental yet very fun."
             },
             beer: {
                 title: "Beer Culture",
@@ -1030,7 +1090,7 @@
                 date: "September - November 2025",
                 imgSrc: "Beer.png",
                 description: "A promotional layout strategy. Bringing traditional pub styling into a physical leaflet to create a striking piece of material that creates understanding of beer culture.",
-                process: "To pull this design together, I decided to create my own patterns in the style of designers such as William Morris. After this, I researched text layout and structure and the best possible way of creating a design that resembles community. Pairing this with my design language I was able to create an easily distributable leaflet that accurately hit all of my criteria."
+                process: "To pull this design together, I decided to create my own patterns in the style of designers such as William Morris. After this, I researched text layout and structure and the best possible way of creating a design that resembles community."
             },
             strata: {
                 title: "Strata",
@@ -1040,7 +1100,7 @@
                 date: "November 2025 - January 2026",
                 imgSrc: "Strata.png",
                 description: "A modern editorial digital environment concept. Utilizing dynamic screen layouts, stark typographic hierarchies, and interactive viewport components to showcase luxury architecture and interior systems.",
-                process: "The digital execution utilized a rigid responsive viewport system to treat the web browser like an elite print layout asset. Typographic scale parameters were set up using custom fluid CSS mechanics, allowing severe editorial headers to dynamically adapt across variable hardware monitors without losing structural grid alignment. The spatial environment layout sets a heavy emphasis on asymmetrical margins and brutalist structural borders, balancing full-bleed architectural presentation mockups with technical copy blocks to create a luxury gallery mood system that behaves flawlessly under modern web animation engines."
+                process: "The digital execution utilized a rigid responsive viewport system to treat the web browser like an elite print layout asset. Typographic scale parameters were set up using custom fluid CSS mechanics."
             },
             johnlewis: {
                 title: "John Lewis",
@@ -1050,7 +1110,7 @@
                 date: "February - May 2025",
                 imgSrc: "John Lewis.png",
                 description: "A conceptual packaging evolution assignment. Stripping away decorative ornament components to highlight product geometry, resulting in an elegant and timeless sustainable footprint solution.",
-                process: "This projects aim was to create a more playful and diverse unboxing experience for all ages. With this brief I decided I wanted to produce a piece of design that holds resonance and memories with viewers, particularly the older generation due to my end results using older illustration."
+                process: "This projects aim was to create a more playful and diverse unboxing experience for all ages. With this brief I decided I wanted to produce a piece of design that holds resonance and memories with viewers."
             },
             mosaic: {
                 title: "Mosaic Events",
@@ -1060,7 +1120,7 @@
                 date: "Nov 2022 - Aug 2024 &mdash; <a href='https://mosaicevents.co.uk/' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit Live Site ↗</a>",
                 imgSrc: "Mosaic.png",
                 description: "A multi-year operational tenure involving on-site event management, structural spatial layout design, and digital document architecture, culminating in a specialized 20th-anniversary celebratory identity rebrand.",
-                process: "My tenure spanned both spatial logistics and graphic architecture. Initial operations focused on documentation management, content capturing, and on-site spatial engineering—including delegate tracking and calculating high-density furniture layouts for optimal crowd flow. This deep understanding of event environments directly informed the later identity system, allowing me to engineer a celebratory mark optimized for cross-platform clarity across both digital email headers and physical event wayfinding systems."
+                process: "My tenure spanned both spatial logistics and graphic architecture. Initial operations focused on documentation management, content capturing, and on-site spatial engineering."
             },
             football: {
                 title: "The Dick Turpin",
@@ -1070,7 +1130,7 @@
                 date: "April 2025",
                 imgSrc: "Turpin.png",
                 description: "A sponsor creation based off an existing chalk illustration within the pub on a blackboard. This was then transferred to all versions of a local football club.",
-                process: "The design process focused on converting the hand-drawn, tactile qualities of the original blackboard illustration into a high-contrast vector graphic suitable for screen printing on kit textiles. Balancing the preservation of the original's gritty, authentic texture against the requirements of modern sports apparel manufacturing required precise pathing and contrast optimization to ensure the logo remained legible at distance during match play."
+                process: "The design process focused on converting the hand-drawn, tactile qualities of the original blackboard illustration into a high-contrast vector graphic suitable for screen printing on kit textiles."
             },
             shiny: {
                 title: "Shiny Thomas",
@@ -1079,11 +1139,12 @@
                 role: "Local Artist Branding",
                 date: "July 2021 - Sept 2025 &mdash; <a href='https://open.spotify.com/artist/0t4QywJUYA7Jw0Aa4WXg9a?si=M0nvguzXSEqMcn8UCNaWYw' target='_blank' style='color: var(--text-color); text-decoration: underline;'>Visit On Spotify ↗</a>",
                 imgSrc: "shinycovers.png",
-                description: "A collaboration with a local artist that began during lockdown and panned out to 2025. Album and single covers were designed to push the artists music forward which have been distributed on all major music streaming services.",
-                process: "Initiated during the 2021 lockdowns, this long-term branding collaboration evolved into an expansive catalog of 12 total album covers for local musician Shiny Thomas. The core of the project required a stringent systematic design approach for a 6-part archival series titled 'The Lockdown Tapes'—encompassing Volumes 1 through 5, followed by a comprehensive compilation album a year later. Immersing myself in the music allowed the design language to shift organically from the structured, collective isolation of the pandemic tapes toward highly personalized, intimate visual architectures for the remaining singles and albums. The final assets bridge raw sonic themes with sharp digital layouts, establishing a deeply resonant visual identity across all major streaming platforms."
+                description: "A collaboration with a local artist that began during lockdown and panned out to 2025. Album and single covers were designed to push the artists music forward.",
+                process: "Initiated during the 2021 lockdowns, this long-term branding collaboration evolved into an expansive catalog of 12 total album covers for local musician Shiny Thomas."
             }
         };
 
+        // Modal Handling
         const overlay = document.getElementById('case-study-overlay');
         const dynamicContent = document.getElementById('case-study-dynamic-content');
         const closeBtn = document.getElementById('close-case-study');
@@ -1118,7 +1179,7 @@
                                 </div>
                             </div>
                             <div class="cs-right-pane">
-                                <img src="${data.imgSrc}" alt="${data.title} Main Artwork" class="cs-main-image">
+                                <img src="${data.imgSrc}" alt="${data.title} Artwork">
                             </div>
                         `;
                         
@@ -1126,8 +1187,7 @@
                         overlay.style.display = 'block';
                         overlay.scrollTop = 0;
                         
-                        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
-                        gsap.fromTo(".case-study-content", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: "power3.out" });
+                        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4 });
                     }
                 }
             });
@@ -1136,8 +1196,7 @@
         closeBtn.addEventListener('click', () => {
             gsap.to(overlay, {
                 opacity: 0,
-                duration: 0.4,
-                ease: "power2.inOut",
+                duration: 0.3,
                 onComplete: () => {
                     overlay.style.display = 'none';
                     document.body.style.overflow = '';
@@ -1145,17 +1204,17 @@
             });
         });
 
+        // Theme Toggle
         const toggleBtn = document.getElementById('theme-toggle');
         toggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'light') {
-                document.documentElement.removeAttribute('data-theme');
+                document.documentElement.setAttribute('data-theme', 'dark');
                 toggleBtn.textContent = 'Light Mode';
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 toggleBtn.textContent = 'Dark Mode';
             }
-            ScrollTrigger.refresh();
         });
     </script>
 </body>
