@@ -58,7 +58,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Fixed Navigation Header */
         header {
             position: fixed;
             top: 0;
@@ -72,7 +71,6 @@
             mix-blend-mode: difference;
         }
 
-        /* 3-Line Hamburger Menu Button */
         .menu-toggle {
             background: none;
             border: none;
@@ -111,7 +109,6 @@
             text-decoration: none;
         }
 
-        /* Fullscreen Navigation Drawer */
         .nav-drawer {
             position: fixed;
             top: 0;
@@ -181,7 +178,6 @@
             border-color: var(--text-color);
         }
 
-        /* Hero Landing Section */
         .hero-section {
             min-height: 100vh;
             display: flex;
@@ -233,7 +229,6 @@
             background-color: var(--sub-color);
         }
 
-        /* Intro Section */
         .intro-section {
             max-width: 1400px;
             margin: 0 auto 4rem auto;
@@ -260,7 +255,6 @@
             font-weight: 300;
         }
 
-        /* NEW: Skills Section */
         .skills-section {
             max-width: 1400px;
             margin: 0 auto 6rem auto;
@@ -314,7 +308,6 @@
             font-size: 0.8rem;
         }
 
-        /* Portfolio Filter Nav */
         .category-nav {
             max-width: 1400px;
             margin: 0 auto 4rem auto;
@@ -345,7 +338,6 @@
             font-weight: 700;
         }
 
-        /* Project Layouts */
         .portfolio-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -377,7 +369,6 @@
             order: 1;
         }
 
-        /* Reveal Animation Container */
         .image-container {
             width: 100%;
             aspect-ratio: 4 / 3; 
@@ -444,7 +435,6 @@
             letter-spacing: 0.08em;
         }
 
-        /* Info Pill Button */
         .info-toggle-btn {
             background: transparent;
             border: 1px solid var(--btn-border);
@@ -482,7 +472,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Collapsible Project Quick Specs Drawer */
         .project-quick-info {
             max-height: 0;
             overflow: hidden;
@@ -521,7 +510,6 @@
             font-weight: 400;
         }
 
-        /* Instagram Section */
         .instagram-section {
             max-width: 1400px;
             margin: 10rem auto 0 auto;
@@ -589,7 +577,6 @@
             filter: grayscale(0%);
         }
 
-        /* Footer */
         footer {
             max-width: 1400px;
             margin: 10rem auto 4rem auto;
@@ -687,7 +674,6 @@
             color: var(--meta-color);
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 900px) {
             header { padding: 1.5rem 2rem; }
             .hero-section { padding: 8rem 2rem 3rem 2rem; }
@@ -713,7 +699,6 @@
 </head>
 <body>
 
-    <!-- Header Navigation Bar -->
     <header>
         <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
             <span></span>
@@ -723,13 +708,12 @@
         <a href="#hero" class="brand-logo">arix.psd</a>
     </header>
 
-    <!-- Slide-Out Fullscreen Navigation Overlay -->
     <div class="nav-drawer" id="nav-drawer">
         <div class="drawer-links">
             <a href="#hero" class="drawer-link">Home</a>
-            <a href="#portfolio-nav" class="drawer-link">Selected Work</a>
             <a href="#portfolio-intro" class="drawer-link">About</a>
             <a href="#skills" class="drawer-link">Skills</a>
+            <a href="#portfolio-nav" class="drawer-link">Selected Work</a>
             <a href="#instagram-feed" class="drawer-link">Instagram</a>
             <a href="#portfolio-footer" class="drawer-link">Contact</a>
         </div>
@@ -739,7 +723,6 @@
         </div>
     </div>
 
-    <!-- Minimalist Hero Landing Area -->
     <section class="hero-section" id="hero">
         <div>
             <h1 class="hero-title">arix.psd</h1>
@@ -755,7 +738,6 @@
         </div>
     </section>
 
-    <!-- Brief Portfolio Intro -->
     <section class="intro-section" id="portfolio-intro">
         <div class="intro-column">
             <h2>Welcome</h2>
@@ -767,7 +749,6 @@
         </div>
     </section>
 
-    <!-- Skills & Capabilities Section -->
     <section class="skills-section" id="skills">
         <div class="skills-header-title">Skills & Experience</div>
         <div class="skills-grid">
@@ -801,17 +782,43 @@
         </div>
     </section>
 
-    <!-- Category Filter Controls -->
     <nav class="category-nav" id="portfolio-nav">
         <button class="filter-btn active" data-target="all">All Projects</button>
         <button class="filter-btn" data-target="university">University</button>
         <button class="filter-btn" data-target="freelance">Freelance Workspace</button>
     </nav>
 
-    <!-- Main Portfolio Works Grid -->
     <main class="portfolio-container">
 
-        <!-- T.U.R.F -->
+        <div class="project-row" data-category="university">
+            <div class="image-container">
+                <img src="NorthernM.jpg" alt="Northern Monk Regional IPA Packaging Series">
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <span class="project-title">Northern Monk</span>
+                    <div class="meta-right-group">
+                        <span class="project-category">Branding / Packaging</span>
+                        <button class="info-toggle-btn">+ Info</button>
+                    </div>
+                </div>
+                <p class="project-description">
+                    A conceptual illustrative packaging series created for Northern Monk Brewery celebrating regional heritage across Yorkshire. The designs incorporate detailed hand-drawn architectural landmarks honoring local identity—featuring <strong>Holyhop IPA</strong> (York Minster), <strong>Cornhop IPA</strong> (Leeds Corn Exchange), and <strong>Liverhop IPA</strong> (the Liver Building).
+                </p>
+                <div class="project-quick-info">
+                    <div class="info-grid">
+                        <div class="info-item"><span>Editions</span><p>Holyhop, Cornhop, Liverhop IPA</p></div>
+                        <div class="info-item"><span>Deliverables</span><p>Can Wraps, Glassware, Colorways</p></div>
+                        <div class="info-item"><span>Tools Used</span><p>Pen & Ink, Illustrator, Photoshop</p></div>
+                        <div class="info-item"><span>Context</span><p>University Module</p></div>
+                    </div>
+                </div>
+                <p class="project-process">
+                    <strong>Process:</strong> Developed primary and alternate packaging layouts paired with custom glassware graphics. Detailed fine-line architectural sketches of northern landmarks were converted into vector overlays and structured across earth-tone colorways.
+                </p>
+            </div>
+        </div>
+
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="TURF.png" alt="Experimental Typography Layout">
@@ -841,7 +848,6 @@
             </div>
         </div>
 
-        <!-- Drift App Interface -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Drift.png" alt="Drift App Project">
@@ -871,7 +877,6 @@
             </div>
         </div>
 
-        <!-- Beer Culture -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Beer.png" alt="Beer Campaign">
@@ -901,7 +906,6 @@
             </div>
         </div>
 
-        <!-- Strata -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="Strata.png" alt="Strata Visual Identity">
@@ -931,7 +935,6 @@
             </div>
         </div>
 
-        <!-- John Lewis -->
         <div class="project-row" data-category="university">
             <div class="image-container">
                 <img src="John Lewis.png" alt="John Lewis Packaging">
@@ -961,7 +964,6 @@
             </div>
         </div>
 
-        <!-- Mosaic Events -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Mosaic.png" alt="Mosaic Events">
@@ -991,7 +993,6 @@
             </div>
         </div>
 
-        <!-- The Dick Turpin -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="Turpin.png" alt="The Dick Turpin">
@@ -1021,7 +1022,6 @@
             </div>
         </div>
 
-        <!-- Shiny Thomas -->
         <div class="project-row" data-category="freelance">
             <div class="image-container">
                 <img src="shinycovers.png" alt="Shiny Thomas Covers">
@@ -1053,7 +1053,6 @@
 
     </main>
 
-    <!-- Instagram Feed Gallery -->
     <section class="instagram-section" id="instagram-feed">
         <div class="instagram-header">
             <h3>Instagram Feed</h3>
@@ -1075,7 +1074,6 @@
         </div>
     </section>
 
-    <!-- Footer Enquiries Section -->
     <footer id="portfolio-footer">
         <div class="footer-grid">
             <div class="footer-cta">
@@ -1102,7 +1100,6 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Navigation Menu Drawer Toggle
         const menuToggle = document.getElementById('menu-toggle');
         const navDrawer = document.getElementById('nav-drawer');
         const drawerLinks = document.querySelectorAll('.drawer-link');
@@ -1125,7 +1122,6 @@
             });
         });
 
-        // Toggle Quick Specs Info Panel
         document.querySelectorAll('.info-toggle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const projectContent = btn.closest('.project-content');
@@ -1142,7 +1138,6 @@
             });
         });
 
-        // Alternating Layouts and Smooth Clip-Path Reveal Animations
         function setupRowsAndAnimations() {
             let visibleIndex = 1; 
 
@@ -1196,7 +1191,6 @@
 
         setupRowsAndAnimations();
 
-        // Instagram Cards Reveal
         gsap.utils.toArray(".insta-card").forEach((card) => {
             const img = card.querySelector('img');
 
@@ -1223,7 +1217,6 @@
             });
         });
 
-        // Category Filter Logic
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectRows = document.querySelectorAll('.project-row');
 
@@ -1259,7 +1252,6 @@
             });
         });
 
-        // Dark/Light Theme Switching
         const toggleBtn = document.getElementById('theme-toggle');
         toggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
